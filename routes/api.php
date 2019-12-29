@@ -20,8 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login', 'LoginControllerAPI@login');
 Route::middleware('auth:api')->post('logout', 'LoginControllerAPI@logout');
 
-
 Route::get('sensors', 'SensorsControllerAPI@index');
+Route::get('sensor/{id}', 'SensorsControllerAPI@getSensor');
 Route::post('create', 'SensorsControllerAPI@create');
 Route::patch('update', 'SensorsControllerAPI@update');
-Route::delete('delete', 'SensorsControllerAPI@delete');
+Route::delete('delete/{id}', 'SensorsControllerAPI@delete');

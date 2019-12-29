@@ -1957,11 +1957,9 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/sensors/edit-sensor.vue?vue&type=script&lang=js& ***!
   \******************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -2007,61 +2005,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
+module.exports = {
+  //props:["currentUser"],
   data: function data() {
     return {
-      form: {
-        email: '',
-        name: '',
-        food: null,
-        checked: []
-      },
-      foods: [{
-        text: 'Select One',
-        value: null
-      }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
-      show: true
+      id: this.$route.params.id,
+      currentSensor: []
     };
   },
   methods: {
-    onSubmit: function onSubmit(evt) {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
-    },
-    onReset: function onReset(evt) {
+    show: function show() {
       var _this = this;
 
-      evt.preventDefault(); // Reset our form values
-
-      this.form.email = '';
-      this.form.name = '';
-      this.form.food = null;
-      this.form.checked = []; // Trick to reset/clear native browser form validation state
-
-      this.show = false;
-      this.$nextTick(function () {
-        _this.show = true;
+      console.log(this.currentSensor);
+      axios.patch('api/update/', this.currentSensor).then(function (response) {
+        console.log(response);
+        console.log(_this.currentSensor);
+      })["catch"](function (error) {
+        console.log(error);
       });
+    },
+    back: function back() {
+      this.$router.push('/sensors');
     }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    console.log("Sensor");
+    axios.get('api/sensor/', this.$route.params.id).then(function (response) {
+      console.log(response.data);
+      _this2.currentSensor = response.data.data;
+      console.log(_this2.currentSensor);
+    })["catch"](function (error) {
+      console.log(error);
+    });
   }
-});
+};
 
 /***/ }),
 
@@ -2111,14 +2091,33 @@ __webpack_require__.r(__webpack_exports__);
       sensors: []
     };
   },
+  methods: {
+    editSensor: function editSensor($id) {
+      this.$router.push('/edit-sensor/' + $id);
+    },
+    deleteSensor: function deleteSensor($id) {
+      var _this = this;
+
+      axios["delete"]('/api/delete/' + $id).then(function (response) {
+        console.log(response);
+        _this.sensors = response.data.data;
+        console.log(_this.sensors);
+        axios.get('/api/sensors').then(function (response) {
+          console.log(response);
+          _this.sensors = response.data.data;
+          console.log(_this.sensors);
+        })["catch"](function (error) {});
+      })["catch"](function (error) {});
+    }
+  },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     console.log("Im here");
     axios.get('/api/sensors').then(function (response) {
       console.log(response);
-      _this.sensors = response.data.data;
-      console.log(_this.sensors);
+      _this2.sensors = response.data.data;
+      console.log(_this2.sensors);
     })["catch"](function (error) {});
   }
 });
@@ -52632,178 +52631,214 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _c("br"),
-      _vm._v(" "),
-      _c(
-        "div",
-        [
-          _c("b-jumbotron", {
-            attrs: {
-              "bg-variant": "",
-              "text-variant": "black",
-              "border-variant": ""
-            },
-            scopedSlots: _vm._u([
-              {
-                key: "header",
-                fn: function() {
-                  return [_vm._v("Edit Sensor")]
-                },
-                proxy: true
-              }
-            ])
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
+  return _c("div", { staticClass: "container" }, [
+    _c("br"),
+    _vm._v(" "),
+    _c(
+      "div",
+      [
+        _c("b-jumbotron", {
+          attrs: {
+            "bg-variant": "",
+            "text-variant": "black",
+            "border-variant": ""
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "header",
+              fn: function() {
+                return [_vm._v("Edit Sensor")]
+              },
+              proxy: true
+            }
+          ])
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", [
       _c("hr"),
       _vm._v(" "),
-      _vm.show
-        ? _c(
-            "b-form",
-            { on: { submit: _vm.onSubmit, reset: _vm.onReset } },
-            [
-              _c(
-                "b-form-group",
-                {
-                  attrs: {
-                    id: "input-group-1",
-                    label: "Email address:",
-                    "label-for": "input-1",
-                    description:
-                      "We'll never share your email with anyone else."
-                  }
-                },
-                [
-                  _c("b-form-input", {
-                    attrs: {
-                      id: "input-1",
-                      type: "email",
-                      required: "",
-                      placeholder: "Enter email"
-                    },
-                    model: {
-                      value: _vm.form.email,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "email", $$v)
-                      },
-                      expression: "form.email"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "b-form-group",
-                {
-                  attrs: {
-                    id: "input-group-2",
-                    label: "Your Name:",
-                    "label-for": "input-2"
-                  }
-                },
-                [
-                  _c("b-form-input", {
-                    attrs: {
-                      id: "input-2",
-                      required: "",
-                      placeholder: "Enter name"
-                    },
-                    model: {
-                      value: _vm.form.name,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "name", $$v)
-                      },
-                      expression: "form.name"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "b-form-group",
-                {
-                  attrs: {
-                    id: "input-group-3",
-                    label: "Food:",
-                    "label-for": "input-3"
-                  }
-                },
-                [
-                  _c("b-form-select", {
-                    attrs: { id: "input-3", options: _vm.foods, required: "" },
-                    model: {
-                      value: _vm.form.food,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "food", $$v)
-                      },
-                      expression: "form.food"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "b-form-group",
-                { attrs: { id: "input-group-4" } },
-                [
-                  _c(
-                    "b-form-checkbox-group",
-                    {
-                      attrs: { id: "checkboxes-4" },
-                      model: {
-                        value: _vm.form.checked,
-                        callback: function($$v) {
-                          _vm.$set(_vm.form, "checked", $$v)
-                        },
-                        expression: "form.checked"
-                      }
-                    },
-                    [
-                      _c("b-form-checkbox", { attrs: { value: "me" } }, [
-                        _vm._v("Check me out")
-                      ]),
-                      _vm._v(" "),
-                      _c("b-form-checkbox", { attrs: { value: "that" } }, [
-                        _vm._v("Check that out")
-                      ])
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "b-button",
-                { attrs: { type: "submit", variant: "primary" } },
-                [_vm._v("Submit")]
-              ),
-              _vm._v(" "),
-              _c("b-button", { attrs: { type: "reset", variant: "danger" } }, [
-                _vm._v("Reset")
-              ])
-            ],
-            1
-          )
-        : _vm._e(),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.currentSensor.name,
+              expression: "currentSensor.name"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { disabled: "", type: "text" },
+          domProps: { value: _vm.currentSensor.name },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.currentSensor, "name", $event.target.value)
+            }
+          }
+        })
+      ]),
       _vm._v(" "),
-      _c(
-        "b-card",
-        { staticClass: "mt-3", attrs: { header: "Form Data Result" } },
-        [_c("pre", { staticClass: "m-0" }, [_vm._v(_vm._s(_vm.form))])]
-      )
-    ],
-    1
-  )
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("Last Update")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.currentSensor.lastUpdate,
+              expression: "currentSensor.lastUpdate"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { disabled: "", type: "text" },
+          domProps: { value: _vm.currentSensor.lastUpdate },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.currentSensor, "lastUpdate", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.currentSensor.id,
+              expression: "currentSensor.id"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { disabled: "", type: "text" },
+          domProps: { value: _vm.currentSensor.id },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.currentSensor, "id", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("Value")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.currentSensor.value,
+              expression: "currentSensor.value"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { disabled: "", type: "text" },
+          domProps: { value: _vm.currentSensor.value },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.currentSensor, "value", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("Min. Value")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.currentSensor.minVal,
+              expression: "currentSensor.minVal"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text" },
+          domProps: { value: _vm.currentSensor.minVal },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.currentSensor, "minVal", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("Max Value")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.currentSensor.maxVal,
+              expression: "currentSensor.maxVal"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text" },
+          domProps: { value: _vm.currentSensor.maxVal },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.currentSensor, "maxVal", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", {}, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-xs btn-success",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.show()
+              }
+            }
+          },
+          [_vm._v("Editar")]
+        ),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn btn-xs btn-warning" }, [
+          _vm._v("Cancelar")
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("br")
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -52880,29 +52915,40 @@ var render = function() {
                 _vm._v(" "),
                 _c("p", [_vm._v("IP: " + _vm._s(sensor.ip))]),
                 _vm._v(" "),
-                _c("p", [_vm._v("Min. Value: " + _vm._s(sensor.minVale))]),
+                _c("p", [_vm._v("Min. Value: " + _vm._s(sensor.minVal))]),
                 _vm._v(" "),
-                _c("p", [_vm._v("Max. Value: " + _vm._s(sensor.maxVale))]),
+                _c("p", [_vm._v("Max. Value: " + _vm._s(sensor.maxVal))]),
                 _vm._v(" "),
                 _c("p", [_vm._v("Last Update: " + _vm._s(sensor.lastUpdate))])
               ]),
               _vm._v(" "),
               _c(
                 "b-button",
-                { attrs: { href: "#", variant: "info" } },
-                [
-                  _c(
-                    "router-link",
-                    { staticClass: "nav-link", attrs: { to: "/edit-sensor" } },
-                    [_vm._v("Edit")]
-                  )
-                ],
-                1
+                {
+                  attrs: { href: "#", variant: "info" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.editSensor(sensor.id)
+                    }
+                  }
+                },
+                [_vm._v("Edit")]
               ),
               _vm._v(" "),
-              _c("b-button", { attrs: { href: "#", variant: "danger" } }, [
-                _vm._v("Delete")
-              ])
+              _c(
+                "b-button",
+                {
+                  attrs: { href: "#", variant: "danger" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.deleteSensor(sensor.id)
+                    }
+                  }
+                },
+                [_vm._v("Delete")]
+              )
             ],
             1
           )
@@ -69110,7 +69156,7 @@ var routes = [{
   path: '/sensors',
   component: sensors
 }, {
-  path: '/edit-sensor',
+  path: '/edit-sensor/:id',
   component: editsensor
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
@@ -69298,14 +69344,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************************!*\
   !*** ./resources/js/components/sensors/edit-sensor.vue ***!
   \*********************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit_sensor_vue_vue_type_template_id_67a7ee4c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit-sensor.vue?vue&type=template&id=67a7ee4c& */ "./resources/js/components/sensors/edit-sensor.vue?vue&type=template&id=67a7ee4c&");
 /* harmony import */ var _edit_sensor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit-sensor.vue?vue&type=script&lang=js& */ "./resources/js/components/sensors/edit-sensor.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _edit_sensor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _edit_sensor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -69335,13 +69382,15 @@ component.options.__file = "resources/js/components/sensors/edit-sensor.vue"
 /*!**********************************************************************************!*\
   !*** ./resources/js/components/sensors/edit-sensor.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_sensor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./edit-sensor.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/sensors/edit-sensor.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_sensor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_sensor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_sensor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_sensor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_sensor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_sensor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

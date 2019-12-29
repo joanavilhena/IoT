@@ -18,13 +18,13 @@
                     <p>State: {{sensor.state}}</p>
                     <p>Name: {{sensor.name}}</p>
                     <p>IP: {{sensor.ip}}</p>
-                    <p>Min. Value: {{sensor.minVale}}</p>
-                    <p>Max. Value: {{sensor.maxVale}}</p>
+                    <p>Min. Value: {{sensor.minVal}}</p>
+                    <p>Max. Value: {{sensor.maxVal}}</p>
                     <p>Last Update: {{sensor.lastUpdate}}</p>
                 </b-card-text>
 
-                <b-button href="#" variant="info"><router-link class="nav-link" to="/edit-sensor">Edit</router-link></b-button>
-                <b-button href="#" variant="danger">Delete</b-button>
+                <b-button href="#" variant="info" v-on:click.prevent="editSensor(sensor.id)">Edit</b-button>
+                <b-button href="#" variant="danger" v-on:click.prevent="deleteSensor(sensor.id)" >Delete</b-button>
             </b-card>
         </b-card-group>
     </div>
@@ -40,6 +40,42 @@ export default {
       }
     },
 
+    methods: {
+       editSensor($id)
+       {
+            this.$router.push('/edit-sensor/'+ $id);
+       },
+
+       deleteSensor($id)
+       {
+        axios.delete('/api/delete/'+ $id )
+        .then(response=>{
+      
+            console.log(response)
+            this.sensors = response.data.data;
+            console.log(this.sensors)
+
+            axios.get('/api/sensors')
+            .then(response=>{
+      
+            console.log(response)
+            this.sensors = response.data.data;
+            console.log(this.sensors)
+            }).catch(error=>{
+       
+      })
+       
+      }).catch(error=>{
+       
+      })
+
+      }
+
+
+
+      
+    },
+
     mounted()
     {
         console.log("Im here")
@@ -47,7 +83,7 @@ export default {
         .then(response=>{
       
             console.log(response)
-            this.sensors = response.data.data
+            this.sensors = response.data.data;
             console.log(this.sensors)
       }).catch(error=>{
        

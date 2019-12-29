@@ -22,7 +22,7 @@ class Sensor extends JsonResource
            'ip' => $this->ip,
            'minVal' => $this->minVal,
            'maxVal' => $this->maxVal,
-           'lastUpdate'=> $this->lastUpdate,
+           'lastUpdate'=> $this->updated_at,
            'value'=> $this->value
          ];
      }

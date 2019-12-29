@@ -7,91 +7,88 @@
             <template v-slot:header>Edit Sensor</template>
         </b-jumbotron>
     </div>
-    <hr>
+    <div>
+        <hr>
+        <div class="form-group">
+            <label>Name</label>
+            <input disabled type="text" class="form-control" v-model="currentSensor.name">
+        </div>
+        <div class="form-group">
+            <label>Last Update</label>
+            <input disabled type="text" class="form-control" v-model="currentSensor.lastUpdate">
+        </div>
+        <div class="form-group">
+            <label>ID</label>
+            <input disabled type="text" class="form-control" v-model="currentSensor.id"></input>
+        </div>
+        <div class="form-group">
+            <label>Value</label>
+            <input disabled type="text" class="form-control" v-model="currentSensor.value">
+        </div>
+        <div class="form-group">
+            <label>Min. Value</label>
+            <input type="text" class="form-control" v-model="currentSensor.minVal">
+        </div>
+        <div class="form-group">
+            <label>Max Value</label>
+            <input type="text" class="form-control" v-model="currentSensor.maxVal">
+        </div>
 
-
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group
-        id="input-group-1"
-        label="Email address:"
-        label-for="input-1"
-        description="We'll never share your email with anyone else."
-      >
-        <b-form-input
-          id="input-1"
-          v-model="form.email"
-          type="email"
-          required
-          placeholder="Enter email"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.name"
-          required
-          placeholder="Enter name"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-        <b-form-select
-          id="input-3"
-          v-model="form.food"
-          :options="foods"
-          required
-        ></b-form-select>
-      </b-form-group>
-
-      <b-form-group id="input-group-4">
-        <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
-          <b-form-checkbox value="me">Check me out</b-form-checkbox>
-          <b-form-checkbox value="that">Check that out</b-form-checkbox>
-        </b-form-checkbox-group>
-      </b-form-group>
-
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
-    <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card>
+        <div class="">
+          <button  v-on:click.prevent="show()" class="btn btn-xs btn-success">Editar</button>
+          <button class="btn btn-xs btn-warning">Cancelar</button>
+        </div>
+    </div>
+    <br>
   </div>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        form: {
-          email: '',
-          name: '',
-          food: null,
-          checked: []
-        },
-        foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
-        show: true
+module.exports = {
+    //props:["currentUser"],
+    data: function(){
+      return{
+        id: this.$route.params.id,
+        currentSensor:[],
       }
     },
     methods: {
-      onSubmit(evt) {
-        evt.preventDefault()
-        alert(JSON.stringify(this.form))
+
+      show()
+      {
+        console.log(this.currentSensor);
+      axios.patch('api/update/', this.currentSensor)
+      .then(response=>{
+      
+       console.log(response)
+     
+      console.log(this.currentSensor)
+      }).catch(error=>{
+        console.log(error);
+      });
+
       },
-      onReset(evt) {
-        evt.preventDefault()
-        // Reset our form values
-        this.form.email = ''
-        this.form.name = ''
-        this.form.food = null
-        this.form.checked = []
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
-        })
-      }
+
+       back()
+        {
+            this.$router.push('/sensors');
+        }
+      
+    },
+    mounted()
+    {
+      console.log("Sensor");
+      axios.get('api/sensor/', this.$route.params.id)
+      .then(response=>{
+      
+       console.log(response.data);
+      this.currentSensor = response.data.data;
+      console.log(this.currentSensor)
+      }).catch(error=>{
+        console.log(error);
+      });
     }
+
+
   }
 </script>

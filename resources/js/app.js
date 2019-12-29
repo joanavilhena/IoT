@@ -25,7 +25,7 @@ const routes = [
     {path:'/', redirect:'/home'},
     {path:'/home', component:login},
     {path:'/sensors', component:sensors},
-    {path:'/edit-sensor', component:editsensor},
+    {path:'/edit-sensor/:id', component:editsensor},
     
 
 ];

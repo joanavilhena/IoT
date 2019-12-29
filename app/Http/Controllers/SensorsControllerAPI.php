@@ -17,6 +17,14 @@ class SensorsControllerAPI extends Controller
   
     }
 
+    public function getSensor($id)
+    {
+
+        return new SensorResource(Sensor::where('id',$id)->first());
+       // $sensor = Sensor::findOrFail($id); 
+       // return response()->json($sensor);
+    }
+
     public function create(Request $request){
      
         $request->validate([
@@ -39,14 +47,14 @@ class SensorsControllerAPI extends Controller
     }
 
 
-    public function update(Request $request, $id){
+    public function update(Request $request){
     
         $request->validate([
             'name' => 'min:3|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
             'ip' => 'ipv4',
         ]);
         
-        $sensor = Sensor::findOrFail($id);
+        $sensor = Sensor::findOrFail($request->id);
         
         $sensor->update($request->all());
         $sensor->save();
@@ -57,6 +65,7 @@ class SensorsControllerAPI extends Controller
 
     public function delete($id)
     {
+       
         $sensor = Sensor::findOrFail($id);
         $sensor->delete();
         return response()->json(null, 204);
