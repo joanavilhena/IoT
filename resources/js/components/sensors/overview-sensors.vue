@@ -1,0 +1,82 @@
+<template>
+  <v-container>
+    <br />
+    <br />
+    <v-card-title class="display-1" style="justify-content: rigth; padding-left: 0">Overview</v-card-title>
+    <v-divider style="width: 90%   margin: auto"></v-divider>
+    <br />
+    <br />
+    <v-row>
+      <v-col cols="12" md="4">
+        <v-card color="#A6C16A" dark style="padding: 2%">
+          <v-row no-gutters justify="center">
+            <v-col sm="3" style="text-align: center">
+              <v-icon style="font-size: 100px ">mdi-leaf</v-icon>
+            </v-col>
+            <v-col sm="9">
+              <h1 class="headline">Greenhouses</h1>
+              <h2 style="padding: 5% margin-left: 10%">5 Connected</h2>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+      <weather />
+      
+      <v-col cols="12" md="4" offset-md="4">
+        <v-card color="#F6AE2D" dark style="padding: 2%">
+          <v-row no-gutters justify="center">
+            <v-col sm="3" style="text-align: center">
+              <v-icon style="font-size: 100px ">mdi-water-pump</v-icon>
+            </v-col>
+            <v-col sm="9">
+              <h1 class="headline">You Saved</h1>
+              <h2 style="padding: 5% margin-left: 10%">0 Liters of Water</h2>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+      
+      <v-col cols="12" md="4" />
+      <v-col cols="12" md="4" >
+        <v-card color="#5B723C" dark style="padding: 2%">
+          <v-row no-gutters justify="center">
+            <v-col sm="3" style="text-align: center">
+              <v-icon style="font-size: 100px ">mdi-star</v-icon>
+            </v-col>
+            <v-col sm="9">
+              <h1 class="headline">V.I.P</h1>
+              <h2 style="padding: 5% margin-left: 10%">5 V.I.P Greenhouses</h2>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="4" offset-md="4">
+        <v-card color="#385F73" dark style="padding: 2%">
+          <v-row no-gutters justify="center">
+            <v-col sm="3" style="text-align: center">
+              <v-icon data-text="mdi-water"  style="font-size: 100px ">mdi-water</v-icon>
+            </v-col>
+            <v-col sm="9" style="text-align: right">
+              <h1 class="headline">Water Reserves</h1>
+              <h2 style="padding: 5% margin-left: 10%">{{waterPercentage}}%</h2>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+<script>
+export default {};
+</script>
+
+<script>
+export default {
+  data: function() {
+    return {
+        waterPercentage: 50
+    }
+  }
+}
+</script>
+

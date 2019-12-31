@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const webpack = require('./webpack.config.js')
 
 /*
  |--------------------------------------------------------------------------
@@ -10,6 +11,6 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    .webpackConfig(Object.assign(webpack));

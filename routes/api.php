@@ -22,6 +22,27 @@ Route::middleware('auth:api')->post('logout', 'LoginControllerAPI@logout');
 
 Route::get('sensors', 'SensorsControllerAPI@index');
 Route::get('sensor/{id}', 'SensorsControllerAPI@getSensor');
-Route::post('create', 'SensorsControllerAPI@create');
+Route::post('create', 'SensorDataController@create');
 Route::patch('update', 'SensorsControllerAPI@update');
 Route::delete('delete/{id}', 'SensorsControllerAPI@delete');
+
+
+// SensorData
+
+// Get
+Route::get('sensorData', 'SensorDataController@getAll');
+Route::get('sensorData/{id}', 'SensorDataController@getIndividual');
+
+// Post
+Route::post('sensorData', 'SensorDataController@create');
+
+// Solutions
+
+// Get
+Route::get('solution', 'SolutionsController@getAll');
+Route::get('solution/sensorData', 'SolutionsController@getAllWithSensorData');
+Route::get('solution/{id}', 'SolutionsController@getIndividual');
+
+// Post
+Route::post('solution', 'SolutionsController@create');
+
