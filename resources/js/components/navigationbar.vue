@@ -7,7 +7,7 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item><router-link class="nav-link" to="/sensors">Sensors</router-link></b-nav-item>
+        <b-nav-item><router-link class="nav-link" to="/overview">Overview</router-link></b-nav-item>
         
       </b-navbar-nav>
 
@@ -16,7 +16,6 @@
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
           <template v-slot:button-content>
-            <em>{{$store.state.user.email}}</em>
           </template>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
           <b-dropdown-item href="#">Sign Out</b-dropdown-item>

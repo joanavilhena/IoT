@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Sensor as SensorResource;
 use App\Sensor;
-
 use \Carbon\Carbon;
-
 use Illuminate\Http\Request;
+
+use App\Http\Resources\Sensor as SensorResource;
 
 class SensorsControllerAPI extends Controller
 {
@@ -19,10 +18,7 @@ class SensorsControllerAPI extends Controller
 
     public function getSensor($id)
     {
-
         return new SensorResource(Sensor::where('id',$id)->first());
-       // $sensor = Sensor::findOrFail($id); 
-       // return response()->json($sensor);
     }
 
     public function create(Request $request){
