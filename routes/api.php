@@ -17,7 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('login', 'LoginControllerAPI@login');
 Route::middleware('auth:api')->post('logout', 'LoginControllerAPI@logout');
 
 Route::get('sensors', 'SensorsControllerAPI@index');
@@ -26,6 +25,11 @@ Route::post('create', 'SensorDataController@create');
 Route::patch('update', 'SensorsControllerAPI@update');
 Route::delete('delete/{id}', 'SensorsControllerAPI@delete');
 
+
+// Login
+
+Route::post('login', 'LoginControllerAPI@login');
+Route::post('register', 'LoginControllerAPI@register');
 
 // SensorData
 
