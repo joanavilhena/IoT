@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User; 
 use Illuminate\Http\Request;
 
-define('YOUR_SERVER_URL', 'http://estufatest.test');
+define('YOUR_SERVER_URL', 'http://iot.iot');
 // Check "oauth_clients" table for next 2 values:
 define('CLIENT_ID', '2');
 define('CLIENT_SECRET','9lLP4JuS3mQUmVoGc2mJTx4ZYAJsrQxpqCrNulrn');
