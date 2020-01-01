@@ -32,7 +32,6 @@ class SolutionsController extends Controller
         return response()->json(new SolutionResources($solution), 201);
     }
 
-
     public function create(Request $request)
     {
 
@@ -50,38 +49,26 @@ class SolutionsController extends Controller
             $solution->save();
         }
         catch (ModelNotFoundException $e) {
-            return $this->createFromScratch($request);
+            return $this->createSolutionFromScratch($request);
         }
 
         foreach ($request->sensorData as $key => $sensorIndividual) {
             try {
                 $sensors = SensorData::where('solution_id', $solution->id)->where('name', $sensorIndividual["name"]);
                 $sensors->update(array('most_recent' => 0));
-                $this->createSensorFromScratch($sensorIndividual, $solution->id);
+                app('App\Http\Controllers\SensorDataController')->createSensorFromScratch($sensorIndividual, $solution->id);
             }
             catch (ModelNotFoundException $e) {
-                $this->createSensorFromScratch($sensorIndividual, $solution->id);
+                app('App\Http\Controllers\SensorDataController')->createSensorFromScratch($sensorIndividual, $solution->id);
             }
         }
 
         return response()->json(new SolutionResources($solution), 201);
     }
 
-    public function createSensorFromScratch( $request, $id){
-        $sensor = new SensorData();
+  
 
-        $sensor->name = $request["name"];
-        $sensor->solution_id = $id;
-        $sensor->value = $request["value"];
-        $sensor->most_recent = 1;
-        $sensor->min_value = $request["min_value"];
-        $sensor->max_value = $request["max_value"];
-        $sensor->created_at	 = Carbon::now()->toDateTimeString();;
-        $sensor->updated_at = Carbon::now()->toDateTimeString();;
-        $sensor->save();
-    }
-
-    public function createFromScratch( $request){
+    public function createSolutionFromScratch( $request){
 
         $solution = new Solution();
         $solution->fill($request->all()); // Fill the Details

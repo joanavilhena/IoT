@@ -39,6 +39,7 @@ Route::get('sensorData/{id}', 'SensorDataController@getIndividual');
 
 // Post
 Route::post('sensorData', 'SensorDataController@create');
+Route::post('sensorData/update', 'SensorDataController@update');
 
 // Solutions
 
@@ -49,4 +50,5 @@ Route::get('solution/{id}', 'SolutionsController@getIndividual');
 
 // Post
 Route::post('solution', 'SolutionsController@create');
+Route::post('solution/update', 'SolutionsController@update');
 
