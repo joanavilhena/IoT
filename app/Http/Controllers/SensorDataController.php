@@ -80,10 +80,16 @@ class SensorDataController extends Controller
     }
     
     public function getAll(){
-        return response()->json(SensorData::All(), 201);
+        return response()->json(SensorData::All(), 200);
     }
 
     public function getIndividual($id){
-        return response()->json(new SensorDataResources(SensorData::where('id',$id)->first()), 201);
+        return response()->json(new SensorDataResources(SensorData::where('id',$id)->first()), 200);
+    }
+
+    public function getMostRecentSensorDataBySolution($id){
+        $sensor = SensorData::where("solution_id", "=", $id)->where("most_recent", "=", 1)->get();
+
+        return response()->json($sensor, 200);
     }
 }

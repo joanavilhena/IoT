@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\SensorData;
@@ -12,7 +13,7 @@ use App\Http\Resources\SolutionResources;
 
 class SolutionsController extends Controller
 {
-    
+
     public function create(Request $request)
     {
 
@@ -25,11 +26,11 @@ class SolutionsController extends Controller
 
         // Shearch if it exists if it does update, if it dosn´t create
         try {
-            $solution = Solution::where('token', $request->token )->firstOrFail();
+            $solution = Solution::where('token', $request->token)->firstOrFail();
             $solution->fill($request->all());
+            $solution->sensor_number = count($request->sensorData);
             $solution->save();
-        }
-        catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return $this->createSolutionFromScratch($request);
         }
 
@@ -38,8 +39,7 @@ class SolutionsController extends Controller
                 $sensors = SensorData::where('solution_id', $solution->id)->where('name', $sensorIndividual["name"]);
                 $sensors->update(array('most_recent' => 0));
                 app('App\Http\Controllers\SensorDataController')->createSensorFromScratch($sensorIndividual, $solution->id);
-            }
-            catch (ModelNotFoundException $e) {
+            } catch (ModelNotFoundException $e) {
                 app('App\Http\Controllers\SensorDataController')->createSensorFromScratch($sensorIndividual, $solution->id);
             }
         }
@@ -57,19 +57,29 @@ class SolutionsController extends Controller
             
         ]);*/
 
-        $solution = new Solution();
-        $solution->fill($request->all());
-        $solution->ip = $request->ip;
-        $solution->vip = $request->vip;
-        $solution->token = $request->token;
-        $solution->state = $request->state;
-        $solution->created_at = Carbon::now()->toDateTimeString();;
-        $solution->updated_at = Carbon::now()->toDateTimeString();;
-        $solution->save();
+        try {
+            $solution = Solution::where('token', $request->token)->firstOrFail();
+            $solution->fill($request->all());
+            $solution->save();
+        } catch (ModelNotFoundException $e) {
+            $solution = new Solution();
+            $solution->fill($request->all());
+            $solution->ip = $request->ip;
+            $solution->vip = $request->vip;
+            $solution->token = $request->token;
+            $solution->state = $request->state;
+            $solution->sensor_number = 0;
+            $solution->created_at = Carbon::now()->toDateTimeString();;
+            $solution->updated_at = Carbon::now()->toDateTimeString();;
+            $solution->save();
+        }
+
+        
         return response()->json(new SolutionResources($solution), 201);
     }
 
-    public function createSolutionFromScratch( $request){
+    public function createSolutionFromScratch($request)
+    {
 
         $solution = new Solution();
         $solution->fill($request->all()); // Fill the Details
@@ -77,10 +87,12 @@ class SolutionsController extends Controller
         $solution->vip = $request->vip;
         $solution->token = $request->token;
         $solution->state = $request->state;
+        $solution->sensor_number = count($request->sensorData);
         $solution->created_at = Carbon::now()->toDateTimeString();
         $solution->updated_at = Carbon::now()->toDateTimeString();
-        
+
         $solution->save();
+
 
         foreach ($request->sensorData as $key => $sensorIndividual) {
             $sensor = new SensorData();
@@ -108,7 +120,7 @@ class SolutionsController extends Controller
             'ip' => 'ipv4',
         ]);*/
 
-        $solution = Solution::where('token', $request->token )->firstOrFail();
+        $solution = Solution::where('token', $request->token)->firstOrFail();
         $solution->update($request->all());
         $solution->ip = $request->ip;
         $solution->vip = $request->vip;
@@ -144,6 +156,7 @@ class SolutionsController extends Controller
 
     public function getIndividual($id)
     {
-        return response()->json(new SolutionResources(Solution::where('id', $id)->first()), 200);
+        //return response()->json(new SolutionResources(Solution::where('id', $id)->first()), 200);
+        return response()->json(Solution::where('id', $id)->first(), 200);
     }
 }

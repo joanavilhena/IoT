@@ -15,13 +15,13 @@
             </v-col>
             <v-col sm="9">
               <h1 class="headline">Greenhouses</h1>
-              <h2 style="padding: 5% margin-left: 10%">5 Connected</h2>
+              <h2 style="padding: 5% margin-left: 10%">{{this.countSolutions}} Connected</h2>
             </v-col>
           </v-row>
         </v-card>
       </v-col>
       <weather />
-      
+
       <v-col cols="12" md="4" offset-md="4">
         <v-card color="#F6AE2D" dark style="padding: 2%">
           <v-row no-gutters justify="center">
@@ -35,9 +35,9 @@
           </v-row>
         </v-card>
       </v-col>
-      
+
       <v-col cols="12" md="4" />
-      <v-col cols="12" md="4" >
+      <v-col cols="12" md="4">
         <v-card color="#5B723C" dark style="padding: 2%">
           <v-row no-gutters justify="center">
             <v-col sm="3" style="text-align: center">
@@ -45,7 +45,7 @@
             </v-col>
             <v-col sm="9">
               <h1 class="headline">V.I.P</h1>
-              <h2 style="padding: 5% margin-left: 10%">5 V.I.P Greenhouses</h2>
+              <h2 style="padding: 5% margin-left: 10%">{{this.countVips}} V.I.P Greenhouses</h2>
             </v-col>
           </v-row>
         </v-card>
@@ -54,7 +54,7 @@
         <v-card color="#385F73" dark style="padding: 2%">
           <v-row no-gutters justify="center">
             <v-col sm="3" style="text-align: center">
-              <v-icon data-text="mdi-water"  style="font-size: 100px ">mdi-water</v-icon>
+              <v-icon data-text="mdi-water" style="font-size: 100px ">mdi-water</v-icon>
             </v-col>
             <v-col sm="9" style="text-align: right">
               <h1 class="headline">Water Reserves</h1>
@@ -74,9 +74,33 @@ export default {};
 export default {
   data: function() {
     return {
-        waterPercentage: 50
+      countSolutions: 0,
+      countVips: 0,
+      waterPercentage: 50
+    };
+  },
+  mounted() {
+    this.getSolutions();
+  },
+  methods: {
+    getSolutions() {
+      axios
+        .get("/api/solution")
+        .then(response => {
+          let solucoes = response.data;
+          this.countSolutions = solucoes.length;
+
+          let countVip = 0;
+          solucoes.forEach(element => countVip += element.vip );
+          this.countVips = countVip;
+        })
+        .catch(error => {
+          if (error.response) {
+            console.log(error.response);
+          }
+      });
     }
   }
-}
+};
 </script>
 

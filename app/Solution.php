@@ -11,6 +11,7 @@ class Solution extends Model
         'vip',
         'token',
         'state',
+        'sensor_number',
         'created_at',
         'updated_at',
     ];

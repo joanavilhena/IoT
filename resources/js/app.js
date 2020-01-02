@@ -31,11 +31,13 @@ const navigation = Vue.component('navigation', require('./components/navigationb
 const login = Vue.component('login', require('./components/auth/login.vue').default);
 const overview = Vue.component('overview', require('./components/overviewPage.vue').default);
 const editsensor = Vue.component('edit-sensor', require('./components/sensors/edit-sensor.vue').default);
+const editGreenHouse = Vue.component('edit-green-house', require('./components/sensors/green-house-edit.vue').default);
 const routes = [
     {path:'/', redirect:'/home'},
     {path:'/home', component:login},
     {path:'/overview', component:overview},
     {path:'/edit-sensor/:id', component:editsensor},
+    {path:'/edit-green-house/:id', component:editGreenHouse},
 ];
 const router = new VueRouter({
     routes: routes 

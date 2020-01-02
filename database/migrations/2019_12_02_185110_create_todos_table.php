@@ -19,6 +19,7 @@ class CreateTodosTable extends Migration
             $table->string('ip');
             $table->string('token');
             $table->integer('state');
+            $table->integer('sensor_number');
             $table->timestamps();
         });
     }

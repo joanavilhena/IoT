@@ -21,6 +21,7 @@ class SolutionResources extends JsonResource
             'vip' => $this->vip,
             'token' => $this->token,
             'state' => $this->state,
+            'sensor_number' => $this->sensor_number,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
