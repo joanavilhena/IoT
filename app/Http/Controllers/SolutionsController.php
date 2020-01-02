@@ -12,26 +12,7 @@ use App\Http\Resources\SolutionResources;
 
 class SolutionsController extends Controller
 {
-    public function createWithoutSensors(Request $request)
-    {
-
-        /*$request->validate([
-            'name' => 'required|min:3|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
-            'ip' => 'required|ipv4',
-            'value' => 'required',
-            
-        ]);*/
-
-        $solution = new Solution();
-        $solution->fill($request->all());
-        $solution->vip = 1;
-        $solution->token = 50;
-        $solution->created_at = Carbon::now()->toDateTimeString();;
-        $solution->updated_at = Carbon::now()->toDateTimeString();;
-        $solution->save();
-        return response()->json(new SolutionResources($solution), 201);
-    }
-
+    
     public function create(Request $request)
     {
 
@@ -66,7 +47,27 @@ class SolutionsController extends Controller
         return response()->json(new SolutionResources($solution), 201);
     }
 
-  
+    public function createWithoutSensors(Request $request)
+    {
+
+        /*$request->validate([
+            'name' => 'required|min:3|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
+            'ip' => 'required|ipv4',
+            'value' => 'required',
+            
+        ]);*/
+
+        $solution = new Solution();
+        $solution->fill($request->all());
+        $solution->ip = $request->ip;
+        $solution->vip = $request->vip;
+        $solution->token = $request->token;
+        $solution->state = $request->state;
+        $solution->created_at = Carbon::now()->toDateTimeString();;
+        $solution->updated_at = Carbon::now()->toDateTimeString();;
+        $solution->save();
+        return response()->json(new SolutionResources($solution), 201);
+    }
 
     public function createSolutionFromScratch( $request){
 
@@ -107,12 +108,15 @@ class SolutionsController extends Controller
             'ip' => 'ipv4',
         ]);*/
 
-        $solution = Solution::findOrFail($request->id);
-
+        $solution = Solution::where('token', $request->token )->firstOrFail();
         $solution->update($request->all());
+        $solution->ip = $request->ip;
+        $solution->vip = $request->vip;
+        $solution->token = $request->token;
+        $solution->state = $request->state;
         $solution->save();
 
-        return response()->json(new SolutionResources($solution), 200);
+        return response()->json($solution, 200);
     }
 
     public function delete($id)

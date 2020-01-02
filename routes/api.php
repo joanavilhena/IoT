@@ -50,5 +50,6 @@ Route::get('solution/{id}', 'SolutionsController@getIndividual');
 
 // Post
 Route::post('solution', 'SolutionsController@create');
+Route::post('solution/simple', 'SolutionsController@createWithoutSensors');
 Route::post('solution/update', 'SolutionsController@update');
 

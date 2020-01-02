@@ -8,6 +8,9 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item><router-link class="nav-link" to="/overview">Overview</router-link></b-nav-item>
+
+        <b-nav-item><router-link class="nav-link" to="/edit-sensor">Edit Sensor</router-link></b-nav-item>
+        
         
       </b-navbar-nav>
 

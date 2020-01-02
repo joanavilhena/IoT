@@ -45,23 +45,26 @@ class SensorDataController extends Controller
              'ip' => 'ipv4',
          ]);*/
         
-         $sensors = SensorData::where('solution_id', $request->solution_id)->where('name', $request->name);
-         $sensors->update(array('most_recent' => 0));
-         $this->createSensorFromScratch($request, $$request->solution_id);
+        $sensors = SensorData::where('solution_id', $request->solution_id)->where('name', $request->name);
+        $sensors->update(array('most_recent' => 0));
+        $sensorCreated = $this->createSensorFromScratch($request, $request->solution_id);
+         
+        return response()->json(new SensorDataResources($sensorCreated), 201);
     }
 
     public function createSensorFromScratch( $request, $id){
         $sensor = new SensorData();
 
-        $sensor->name = $request->name;
-        $sensor->solution_id = $id;
-        $sensor->value = $request->value;
+        $sensor->name = $request["name"];
+        $sensor->solution_id = $id ;
+        $sensor->value = $request["value"];
         $sensor->most_recent = 1;
-        $sensor->min_value = $request->min_value;
-        $sensor->max_value = $request->max_value;
+        $sensor->min_value = $request["min_value"];
+        $sensor->max_value = $request["max_value"];
         $sensor->created_at	 = Carbon::now()->toDateTimeString();;
         $sensor->updated_at = Carbon::now()->toDateTimeString();;
         $sensor->save();
+        return $sensor;
     }
 
     public function delete($id)
