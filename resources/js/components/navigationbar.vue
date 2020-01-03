@@ -1,12 +1,13 @@
 <template>
 <div>
   <b-navbar toggleable="lg" type="dark" variant="info">
-   <router-link class="nav-link" to="/home">Estufa 4.0</router-link>
+   <router-link class="nav-link" to="/login">Estufa 4.0</router-link>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
+        <b-nav-item><router-link class="nav-link" to="/home">Home Page</router-link></b-nav-item>
         <b-nav-item><router-link class="nav-link" to="/overview">Overview</router-link></b-nav-item>
         <b-nav-item><router-link class="nav-link" to="/solution">Solutions</router-link></b-nav-item>
         <b-nav-item><router-link class="nav-link" to="/sensors">Sensors</router-link></b-nav-item>
