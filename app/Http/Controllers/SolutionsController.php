@@ -131,14 +131,14 @@ class SolutionsController extends Controller
         return response()->json($solution, 200);
     }
 
-    public function delete($id)
+    public function delete($token)
     {
         /* $request->validate([
             'name' => 'min:3|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
             'ip' => 'ipv4',
         ]);*/
 
-        $solution = Solution::findOrFail($id);
+        $solution = Solution::where('token', $token)->firstOrFail();
         $solution->delete();
         return response()->json(null, 204);
     }

@@ -37,15 +37,9 @@
             <v-col sm="12" class="identifierCardColl">
               <v-btn
                 depressed
-                color="primary"
-                style="width: 100%; margin-bottom: 2%; color: white; text-decoration: none;"
-                to="/edit-sensor"
-              >Analyze</v-btn>
-              <v-btn
-                depressed
                 color="error"
                 style="width: 100%; color: white; text-decoration: none;"
-                @click="deleteSolution(solution.id)"
+                @click="deleteSolution(solution.token)"
               >Delete Greenhouse</v-btn>
             </v-col>
           </v-row>
@@ -129,14 +123,14 @@ export default {
           });
       }
     },
-    deleteSolution(id) {
+    deleteSolution(token) {
       axios
         .post("/api/solution/delete/" + id)
         .then(response => {
           console.log(this.solutions)
           let indexToBeDeleted = -1;
           this.solutions.filter(function(element, index) {
-            if (element.id == id) {
+            if (element.token == token) {
               indexToBeDeleted = index;
               return true;
             }

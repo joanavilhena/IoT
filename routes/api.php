@@ -18,30 +18,43 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:api')->post('logout', 'LoginControllerAPI@logout');
-
+/*
 Route::get('sensors', 'SensorsControllerAPI@index');
 Route::get('sensor/{id}', 'SensorsControllerAPI@getSensor');
 Route::post('create', 'SensorDataController@create');
-Route::patch('update', 'SensorsControllerAPI@update');
+Route::patch('update', 'SensorsControllerAPI@update');*/
 Route::delete('delete/{id}', 'SensorsControllerAPI@delete');
 
 
-// Login
+// ---------- Login ----------
 
 Route::post('login', 'LoginControllerAPI@login');
 Route::post('register', 'LoginControllerAPI@register');
 
-// SensorData
+
+// ---------- SensorData ----------
 
 // Get
-Route::get('sensorData', 'SensorDataController@getAll');
-Route::get('sensorData/{id}', 'SensorDataController@getIndividual');
+
+// All sensors marked as most recent
+Route::get('sensorData', 'SensorDataController@getAllMostRecentSensor');
+//Route::get('sensorData/{id}', 'SensorDataController@getIndividualMostRecentSensor');
+
+
+// All the Sensors 
+Route::get('sensorData/history', 'SensorDataController@getAllSensors');
+Route::get('sensorData/history/solution/{id}/sensor/{name}', 'SensorDataController@getIndividualSensor');
+
+// Sensor By solution
+Route::get('sensorData/solution/{id}', 'SensorDataController@getMostRecentSensorDataBySolution');
 
 // Post
 Route::post('sensorData', 'SensorDataController@create');
 Route::post('sensorData/update', 'SensorDataController@update');
+Route::post('sensorData/delete/solution/{id}/sensor/{name}', 'SensorDataController@delete');
 
-// Solutions
+
+// ---------- Solutions ----------
 
 // Get
 Route::get('solution', 'SolutionsController@getAll');
@@ -52,4 +65,5 @@ Route::get('solution/{id}', 'SolutionsController@getIndividual');
 Route::post('solution', 'SolutionsController@create');
 Route::post('solution/simple', 'SolutionsController@createWithoutSensors');
 Route::post('solution/update', 'SolutionsController@update');
+Route::post('solution/delete/{id}', 'SolutionsController@delete');
 

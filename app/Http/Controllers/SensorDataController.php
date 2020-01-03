@@ -7,6 +7,7 @@ use \Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\SensorDataResources;
+use App\Solution;
 
 class SensorDataController extends Controller
 {
@@ -67,24 +68,36 @@ class SensorDataController extends Controller
         return $sensor;
     }
 
-    public function delete($id)
+    public function delete($solution_id, $name)
     {
        /* $request->validate([
             'name' => 'min:3|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
             'ip' => 'ipv4',
         ]);*/
-
-        $sensor = SensorData::findOrFail($id);
-        $sensor->delete();
+        $sensor = SensorData::where('solution_id', $solution_id)->where('name', $name)->delete();
+        $solution = Solution::find($solution_id);
+        $solution->sensor_number = ($solution->sensor_number -1);
+        $solution->save();
         return response()->json(null, 204);
     }
     
-    public function getAll(){
+    public function getAllSensors(){
         return response()->json(SensorData::All(), 200);
     }
 
-    public function getIndividual($id){
-        return response()->json(new SensorDataResources(SensorData::where('id',$id)->first()), 200);
+    public function getIndividualSensor($solution_id, $name){
+        return response()->json(SensorData::where('solution_id',$solution_id)->where('name',$name)->get(), 200);
+    }
+
+    public function getAllMostRecentSensor(){
+        $sensor = SensorData::where("most_recent", "=", 1)->get();
+
+        return response()->json($sensor, 200);
+    }
+
+    public function getIndividualMostRecentSensor($id){
+        $sensor = SensorData::where('id',$id)->where("most_recent", "=", 1)->get();
+        return response()->json( $sensor, 200);
     }
 
     public function getMostRecentSensorDataBySolution($id){

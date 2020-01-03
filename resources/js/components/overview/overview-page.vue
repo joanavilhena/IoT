@@ -4,7 +4,7 @@
         <br>
         <br>
         <br>
-        <overview-list-sensor/>
+        <overview-solutions/>
     </v-app>
 </template>
 <script>
