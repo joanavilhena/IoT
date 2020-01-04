@@ -17,6 +17,7 @@ class CreateTodosTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('token');
+            $table->string('terra');
             $table->integer('vip');
             $table->integer('state');
             $table->integer('sensor_number');

@@ -18,6 +18,7 @@ class CreateSensorDataTable extends Migration
             $table->integer('solution_id');
             $table->string('name');
             $table->float('value');
+            $table->float('threshold');
             $table->integer('most_recent');
             $table->float('min_value');
             $table->float('max_value');

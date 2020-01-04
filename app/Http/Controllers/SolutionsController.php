@@ -86,6 +86,7 @@ class SolutionsController extends Controller
         $solution->user_id = "51";
         $solution->vip = $request->vip;
         $solution->token = $request->token;
+        $solution->terra = $request->terra;
         $solution->state = $request->state;
         $solution->sensor_number = count($request->sensorData);
         $solution->created_at = Carbon::now()->toDateTimeString();
@@ -102,6 +103,7 @@ class SolutionsController extends Controller
             $sensor->name =  $sensorIndividual["name"]; //$value.name ? "": "";
             $sensor->solution_id = $solution->id;
             $sensor->value = $sensorIndividual["value"];
+            $sensor->threshold = $sensorIndividual["threshold"];
             $sensor->min_value = empty($sensorIndividual["min_value"]) ? "0" : $sensorIndividual["min_value"];
             $sensor->max_value = empty($sensorIndividual["max_value"]) ? "1000" : $sensorIndividual["max_value"] ;
             $sensor->most_recent = 1;
