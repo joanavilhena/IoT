@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 04-Jan-2020 às 01:27
+-- Tempo de geração: 04-Jan-2020 às 06:05
 -- Versão do servidor: 5.7.27-0ubuntu0.18.04.1
 -- versão do PHP: 7.2.22-1+ubuntu18.04.1+deb.sury.org+1
 
@@ -54,16 +54,16 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(87, '2014_10_12_000000_create_users_table', 1),
-(88, '2014_10_12_100000_create_password_resets_table', 1),
-(89, '2016_06_01_000001_create_oauth_auth_codes_table', 1),
-(90, '2016_06_01_000002_create_oauth_access_tokens_table', 1),
-(91, '2016_06_01_000003_create_oauth_refresh_tokens_table', 1),
-(92, '2016_06_01_000004_create_oauth_clients_table', 1),
-(93, '2016_06_01_000005_create_oauth_personal_access_clients_table', 1),
-(94, '2019_08_19_000000_create_failed_jobs_table', 1),
-(95, '2019_11_25_190738_create_sensor_data_table', 1),
-(96, '2019_12_02_185110_create_todos_table', 1);
+(107, '2014_10_12_000000_create_users_table', 1),
+(108, '2014_10_12_100000_create_password_resets_table', 1),
+(109, '2016_06_01_000001_create_oauth_auth_codes_table', 1),
+(110, '2016_06_01_000002_create_oauth_access_tokens_table', 1),
+(111, '2016_06_01_000003_create_oauth_refresh_tokens_table', 1),
+(112, '2016_06_01_000004_create_oauth_clients_table', 1),
+(113, '2016_06_01_000005_create_oauth_personal_access_clients_table', 1),
+(114, '2019_08_19_000000_create_failed_jobs_table', 1),
+(115, '2019_11_25_190738_create_sensor_data_table', 1),
+(116, '2019_12_02_185110_create_todos_table', 1);
 
 -- --------------------------------------------------------
 
@@ -82,6 +82,13 @@ CREATE TABLE `oauth_access_tokens` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Extraindo dados da tabela `oauth_access_tokens`
+--
+
+INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
+('98dd618d4e2c6d7198745315be540f6a7382ed9ed342ced76c7bdd83413b5a40ea11572813fcca42', 2, 2, NULL, '[]', 0, '2020-01-04 05:56:57', '2020-01-04 05:56:57', '2021-01-04 05:56:57');
 
 -- --------------------------------------------------------
 
@@ -117,6 +124,14 @@ CREATE TABLE `oauth_clients` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Extraindo dados da tabela `oauth_clients`
+--
+
+INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'Laravel Personal Access Client', 'icm4ehgb5YetbXKRZJSttszSavUHWQJQzKYeBSnz', 'http://localhost', 1, 0, 0, '2020-01-04 05:36:59', '2020-01-04 05:36:59'),
+(2, NULL, 'Laravel Password Grant Client', 'aIUd1gvwwluRquePsv9Bjjj6Wl0wzeg96XxLHWUD', 'http://localhost', 0, 1, 0, '2020-01-04 05:36:59', '2020-01-04 05:36:59');
+
 -- --------------------------------------------------------
 
 --
@@ -130,6 +145,13 @@ CREATE TABLE `oauth_personal_access_clients` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Extraindo dados da tabela `oauth_personal_access_clients`
+--
+
+INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
+(1, 1, '2020-01-04 05:36:59', '2020-01-04 05:36:59');
+
 -- --------------------------------------------------------
 
 --
@@ -142,6 +164,13 @@ CREATE TABLE `oauth_refresh_tokens` (
   `revoked` tinyint(1) NOT NULL,
   `expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Extraindo dados da tabela `oauth_refresh_tokens`
+--
+
+INSERT INTO `oauth_refresh_tokens` (`id`, `access_token_id`, `revoked`, `expires_at`) VALUES
+('2a2b1385bf24ef6aca920bcf77bac1fcab81d5c9778c1ca10f365c5d89da3623ab0467fa7320a271', '98dd618d4e2c6d7198745315be540f6a7382ed9ed342ced76c7bdd83413b5a40ea11572813fcca42', 0, '2021-01-04 05:56:57');
 
 -- --------------------------------------------------------
 
@@ -178,34 +207,18 @@ CREATE TABLE `sensor_data` (
 --
 
 INSERT INTO `sensor_data` (`id`, `solution_id`, `name`, `value`, `most_recent`, `min_value`, `max_value`, `created_at`, `updated_at`) VALUES
-(2, 1, 'Wather Level', 30.00, 0, 10.00, 50.00, '2020-01-03 21:01:06', '2020-01-03 21:50:33'),
-(3, 1, 'Wather Levels', 30.00, 0, 10.00, 50.00, '2020-01-03 21:01:06', '2020-01-03 21:49:48'),
-(4, 2, 'Oxigenio', 30.00, 0, 15.00, 50.00, '2020-01-03 21:01:24', '2020-01-03 21:54:59'),
-(5, 2, 'Wather Level', 30.00, 0, 10.00, 50.00, '2020-01-03 21:01:24', '2020-01-03 21:55:58'),
-(6, 2, 'Wather Levels', 30.00, 0, 10.00, 50.00, '2020-01-03 21:01:24', '2020-01-03 21:51:47'),
-(7, 2, 'Wather Levels', 300.00, 0, 10.00, 50.00, '2020-01-03 21:07:31', '2020-01-03 21:51:47'),
-(8, 1, 'Wather Level', 30.00, 0, 10.00, 500.00, '2020-01-03 21:19:32', '2020-01-03 21:50:33'),
-(9, 2, 'Wather Levels', 300.00, 0, 10.00, 500.00, '2020-01-03 21:19:39', '2020-01-03 21:51:47'),
-(10, 1, 'Wather Level', 30.00, 0, 10.00, 5.00, '2020-01-03 21:22:39', '2020-01-03 21:50:33'),
-(11, 1, 'Wather Levels', 30.00, 0, 10.00, 500.00, '2020-01-03 21:30:53', '2020-01-03 21:49:48'),
-(12, 1, 'Wather Level', 30.00, 0, 10.00, 7.00, '2020-01-03 21:30:58', '2020-01-03 21:50:33'),
-(13, 1, 'Wather Levels', 30.00, 0, 10.00, 6.00, '2020-01-03 21:33:48', '2020-01-03 21:49:48'),
-(14, 2, 'Oxigenio', 30.00, 0, 15.00, 70.00, '2020-01-03 21:34:51', '2020-01-03 21:54:59'),
-(15, 2, 'Wather Levels', 300.00, 0, 10.00, 15.00, '2020-01-03 21:35:27', '2020-01-03 21:51:47'),
-(16, 2, 'Wather Level', 30.00, 0, 10.00, 75.00, '2020-01-03 21:35:59', '2020-01-03 21:55:58'),
-(17, 1, 'Wather Levels', 30.00, 0, 10.00, 11.00, '2020-01-03 21:37:38', '2020-01-03 21:49:48'),
-(18, 1, 'Wather Level', 30.00, 0, 10.00, 9.00, '2020-01-03 21:41:50', '2020-01-03 21:50:33'),
-(19, 2, 'Oxigenio', 30.00, 0, 15.00, 80.00, '2020-01-03 21:42:36', '2020-01-03 21:54:59'),
-(20, 2, 'Wather Levels', 300.00, 0, 10.00, 11.00, '2020-01-03 21:42:51', '2020-01-03 21:51:47'),
-(21, 2, 'Wather Level', 30.00, 0, 10.00, 99.00, '2020-01-03 21:48:20', '2020-01-03 21:55:58'),
-(22, 2, 'Wather Level', 30.00, 0, 10.00, 150.00, '2020-01-03 21:49:19', '2020-01-03 21:55:58'),
-(23, 1, 'Wather Levels', 30.00, 1, 10.00, 25.00, '2020-01-03 21:49:48', '2020-01-03 21:49:48'),
-(24, 1, 'Wather Level', 30.00, 1, 10.00, 33.00, '2020-01-03 21:50:33', '2020-01-03 21:50:33'),
-(25, 2, 'Wather Levels', 300.00, 1, 10.00, 44.00, '2020-01-03 21:51:47', '2020-01-03 21:51:47'),
-(26, 2, 'Oxigenio', 30.00, 1, 15.00, 66.00, '2020-01-03 21:54:59', '2020-01-03 21:54:59'),
-(27, 2, 'Wather Level', 30.00, 0, 10.00, 160.00, '2020-01-03 21:55:40', '2020-01-03 21:55:58'),
-(28, 2, 'Wather Level', 30.00, 0, 10.00, 170.00, '2020-01-03 21:55:51', '2020-01-03 21:55:58'),
-(29, 2, 'Wather Level', 30.00, 1, 10.00, 180.00, '2020-01-03 21:55:58', '2020-01-03 21:55:58');
+(4, 2, 'luz', 30.00, 0, 15.00, 50.00, '2020-01-04 06:00:49', '2020-01-04 06:01:00'),
+(5, 2, 'ambtemp', 30.00, 0, 10.00, 50.00, '2020-01-04 06:00:49', '2020-01-04 06:01:00'),
+(6, 2, 'ambhum', 30.00, 0, 10.00, 50.00, '2020-01-04 06:00:49', '2020-01-04 06:01:00'),
+(7, 2, 'solotemp', 30.00, 0, 10.00, 50.00, '2020-01-04 06:00:49', '2020-01-04 06:01:00'),
+(8, 2, 'solohum', 30.00, 0, 10.00, 50.00, '2020-01-04 06:00:49', '2020-01-04 06:01:00'),
+(9, 2, 'ambco', 30.00, 0, 10.00, 50.00, '2020-01-04 06:00:49', '2020-01-04 06:01:00'),
+(10, 2, 'luz', 30.00, 1, 15.00, 50.00, '2020-01-04 06:01:00', '2020-01-04 06:01:00'),
+(11, 2, 'ambtemp', 30.00, 1, 10.00, 50.00, '2020-01-04 06:01:00', '2020-01-04 06:01:00'),
+(12, 2, 'ambhum', 30.00, 1, 10.00, 50.00, '2020-01-04 06:01:00', '2020-01-04 06:01:00'),
+(13, 2, 'solotemp', 30.00, 1, 10.00, 50.00, '2020-01-04 06:01:00', '2020-01-04 06:01:00'),
+(14, 2, 'solohum', 30.00, 1, 10.00, 50.00, '2020-01-04 06:01:00', '2020-01-04 06:01:00'),
+(15, 2, 'ambco', 30.00, 1, 10.00, 50.00, '2020-01-04 06:01:00', '2020-01-04 06:01:00');
 
 -- --------------------------------------------------------
 
@@ -215,9 +228,9 @@ INSERT INTO `sensor_data` (`id`, `solution_id`, `name`, `value`, `most_recent`, 
 
 CREATE TABLE `solutions` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `vip` int(11) NOT NULL,
-  `ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vip` int(11) NOT NULL,
   `state` int(11) NOT NULL,
   `sensor_number` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -228,8 +241,8 @@ CREATE TABLE `solutions` (
 -- Extraindo dados da tabela `solutions`
 --
 
-INSERT INTO `solutions` (`id`, `vip`, `ip`, `token`, `state`, `sensor_number`, `created_at`, `updated_at`) VALUES
-(2, 1, '10.10.10.10', '45678904', 1, 3, '2020-01-03 21:01:24', '2020-01-03 21:01:24');
+INSERT INTO `solutions` (`id`, `user_id`, `token`, `vip`, `state`, `sensor_number`, `created_at`, `updated_at`) VALUES
+(2, 51, '4567890', 1, 1, 6, '2020-01-04 06:00:49', '2020-01-04 06:00:49');
 
 -- --------------------------------------------------------
 
@@ -247,6 +260,14 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Extraindo dados da tabela `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, '123', 'tomas@sapo.com', NULL, '$2y$10$u6a52cMMEoeUjxEmlKDYyOdDpEs7y/gNlGb5/Zlpt7sJEtZ0YnKYe', NULL, '2020-01-04 05:10:50', '2020-01-04 05:10:50'),
+(2, '123', 'tomas1@sapo.com', NULL, 'O6FErsYh.go6M', NULL, '2020-01-04 05:10:50', '2020-01-04 05:10:50');
 
 --
 -- Índices para tabelas despejadas
@@ -337,25 +358,25 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de tabela `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT de tabela `oauth_clients`
 --
 ALTER TABLE `oauth_clients`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `oauth_personal_access_clients`
 --
 ALTER TABLE `oauth_personal_access_clients`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `sensor_data`
 --
 ALTER TABLE `sensor_data`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de tabela `solutions`
@@ -367,7 +388,7 @@ ALTER TABLE `solutions`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

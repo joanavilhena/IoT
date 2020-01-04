@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 define('YOUR_SERVER_URL', 'http://iot.iot');
 // Check "oauth_clients" table for next 2 values:
 define('CLIENT_ID', '2');
-define('CLIENT_SECRET','9lLP4JuS3mQUmVoGc2mJTx4ZYAJsrQxpqCrNulrn');
+define('CLIENT_SECRET','aIUd1gvwwluRquePsv9Bjjj6Wl0wzeg96XxLHWUD');
 
 
 class LoginControllerAPI extends Controller
@@ -27,14 +27,12 @@ class LoginControllerAPI extends Controller
         ],
         'exceptions' => false,
         ]);
-
         $errorCode= $response->getStatusCode();
-
         if ($errorCode=='200') {
-            return json_decode((string) $response->getBody(), true);
-        } else {
+        return json_decode((string) $response->getBody(), true);
+            } else {
             return response()->json(
-                ['msg'=>'User credentials are invalid'], $errorCode);
+            ['msg'=>'User credentials are invalid'], $errorCode);
         }
     }
 

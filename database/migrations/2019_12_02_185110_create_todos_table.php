@@ -15,9 +15,9 @@ class CreateTodosTable extends Migration
     {
         Schema::create('solutions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('vip');
-            $table->string('ip');
+            $table->integer('user_id');
             $table->string('token');
+            $table->integer('vip');
             $table->integer('state');
             $table->integer('sensor_number');
             $table->timestamps();

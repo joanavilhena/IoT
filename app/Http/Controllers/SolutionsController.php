@@ -64,7 +64,7 @@ class SolutionsController extends Controller
         } catch (ModelNotFoundException $e) {
             $solution = new Solution();
             $solution->fill($request->all());
-            $solution->ip = $request->ip;
+            $solution->user_id = "51";
             $solution->vip = $request->vip;
             $solution->token = $request->token;
             $solution->state = $request->state;
@@ -83,7 +83,7 @@ class SolutionsController extends Controller
 
         $solution = new Solution();
         $solution->fill($request->all()); // Fill the Details
-        $solution->ip = $request->ip;
+        $solution->user_id = "51";
         $solution->vip = $request->vip;
         $solution->token = $request->token;
         $solution->state = $request->state;
@@ -122,7 +122,7 @@ class SolutionsController extends Controller
 
         $solution = Solution::where('token', $request->token)->firstOrFail();
         $solution->update($request->all());
-        $solution->ip = $request->ip;
+        $solution->user_id = "51";
         $solution->vip = $request->vip;
         $solution->token = $request->token;
         $solution->state = $request->state;
@@ -158,5 +158,11 @@ class SolutionsController extends Controller
     {
         //return response()->json(new SolutionResources(Solution::where('id', $id)->first()), 200);
         return response()->json(Solution::where('id', $id)->first(), 200);
+    }
+
+    public function getSolutionFromUser($user_id)
+    {
+        //return response()->json(new SolutionResources(Solution::where('id', $id)->first()), 200);
+        return response()->json(Solution::where('user_id', $user_id)->get(), 200);
     }
 }

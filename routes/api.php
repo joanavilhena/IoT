@@ -61,6 +61,9 @@ Route::get('solution', 'SolutionsController@getAll');
 Route::get('solution/sensorData', 'SolutionsController@getAllWithSensorData');
 Route::get('solution/{id}', 'SolutionsController@getIndividual');
 
+
+Route::get('solution/user/{user_id}', 'SolutionsController@getSolutionFromUser');
+
 // Post
 Route::post('solution', 'SolutionsController@create');
 Route::post('solution/simple', 'SolutionsController@createWithoutSensors');

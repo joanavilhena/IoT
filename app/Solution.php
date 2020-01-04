@@ -9,6 +9,7 @@ class Solution extends Model
 {
     protected $fillable = [
         'vip',
+        'user_id',
         'token',
         'state',
         'sensor_number',
