@@ -57,7 +57,6 @@
       </template>
       <br />
       <br />
-
       <br />
       <v-row>
         <v-col cols="12" md="4">
@@ -136,12 +135,14 @@ export default {
       //Edit
       dialog: false,
       editedItem: {
+        id: "",
         name: "",
         value: 0,
         min_value: 0,
         max_value: 0
       },
       defaultItem: {
+        id: "",
         name: "",
         value: 0,
         min_value: 0,
@@ -157,6 +158,7 @@ export default {
       val || this.close();
     }
   },
+
   mounted() {
     this.getSensors();
   },
@@ -255,7 +257,7 @@ export default {
 
     editItem(item) {
       this.editedIndex = this.sensors.indexOf(item);
-      this.editedItem = Object.assign({}, item);
+      this.editedItem = item
       this.dialog = true;
     },
 
@@ -310,8 +312,8 @@ export default {
             item.value = response.data.value;
             item.min_value = response.data.min_value;
             item.max_value = response.data.max_value;
-
-            Object.assign(this.sensors[this.editedIndex], item);
+            let editedIndex = this.sensors.indexOf(this.editedItem);
+            Object.assign(this.sensors[editedIndex], item);
           })
           .catch(error => {
             if (error.response) {

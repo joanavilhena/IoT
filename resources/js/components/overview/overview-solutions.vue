@@ -125,7 +125,7 @@ export default {
     },
     deleteSolution(token) {
       axios
-        .post("/api/solution/delete/" + id)
+        .post("/api/solution/delete/" + token)
         .then(response => {
           console.log(this.solutions)
           let indexToBeDeleted = -1;

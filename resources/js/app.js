@@ -18,6 +18,7 @@ import Vuetify from 'vuetify'
 
 Vue.use(Vuetify)
 
+
 import 'vuetify/dist/vuetify.min.css';
 
 import VueApexCharts from 'vue-apexcharts'
@@ -59,14 +60,14 @@ const routes = [
    // {path:'/edit-green-house/:id', component:editGreenHouse},
 ];
 const router = new VueRouter({
-    routes: routes 
+    routes: routes
 });
 
 const app = new Vue({
     el: '#app',
     store,
     vuetify: new Vuetify(),
-    router:router
+    router: router
 });
 
 

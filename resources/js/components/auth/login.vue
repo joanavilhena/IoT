@@ -25,6 +25,7 @@
         </div>
     	<div class="text-center">
         <b-button variant="success" v-on:click.prevent="login">Login</b-button>
+        <b-button variant="success"><router-link to="/register">Create An Acount </router-link></b-button>
       </div>
     </div>
   </div>

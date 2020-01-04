@@ -6,7 +6,7 @@
         aspect-ratio="1"
         class="grey lighten-2"
         max-width="100%"
-        max-height="1000px"
+        max-height="900px"
         gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.4)"
       >
         <v-card class="mx-auto" dark max-width="600" style=" margin-top: 300px" :elevation="7">

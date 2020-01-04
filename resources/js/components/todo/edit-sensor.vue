@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <div class="container">
 
     <br>
@@ -41,7 +41,7 @@
     </div>
     <br>
   </div>
-</template>
+</template> -->
 
 <script>
 module.exports = {
