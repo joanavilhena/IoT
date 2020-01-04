@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div style="padding: 5%;">
     <v-card-title
       class="display-1"
       style="justify-content: rigth; padding-left: 0"
@@ -23,8 +23,8 @@
           <v-row no-gutters justify="center" class="text-center" v-if="solution != undefined">
             <v-col sm="6" class="identifierCardColl">
               <v-card :elevation="2">
-                <h2 class="identifierCardInfoTitle">IP</h2>
-                <div class="identifierCardInfoText">{{solution.ip}}</div>
+                <h2 class="identifierCardInfoTitle">Ref</h2>
+                <div class="identifierCardInfoText">{{solution.token}}</div>
               </v-card>
             </v-col>
             <v-col sm="6" class="identifierCardColl">
@@ -77,7 +77,7 @@
         </v-card>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>
 <script>
 export default {

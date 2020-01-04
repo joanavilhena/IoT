@@ -1,23 +1,19 @@
 <template>
   <v-app>
-    <v-container>
+    <div style="padding: 5%; padding-bottom: 0">
       <br />
       <br />
       <v-card-title class="display-1" style="justify-content: rigth; padding-left: 0">Sensors</v-card-title>
       <v-divider style="width: 90%   margin: auto"></v-divider>
       <template>
         <v-text-field v-model="search" append-icon="mdi-magnify-scan" label="Search"></v-text-field>
-        <v-data-table
-          :headers="solutionTableHeaders"
-          :items="solutions"
-          :search="search"
-        >
+        <v-data-table :headers="solutionTableHeaders" :items="solutions" :search="search">
           <template v-slot:item.action="{ item }">
             <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
           </template>
         </v-data-table>
       </template>
-    </v-container>
+    </div>
   </v-app>
 </template>
 
@@ -51,7 +47,7 @@ export default {
         { text: "Actions", value: "action", sortable: false }
       ],
       //Edit
-      dialog: false,
+      dialog: false
     };
   },
   watch: {
@@ -88,9 +84,7 @@ export default {
       }
       this.solutions.splice(index, 1);
       axios
-        .post(
-          "/api/solution/delete/" + item.token
-        )
+        .post("/api/solution/delete/" + item.token)
         .then(response => {})
         .catch(error => {
           if (error.response) {
@@ -105,8 +99,7 @@ export default {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
       }, 300);
-    },
-
+    }
   }
 };
 </script>

@@ -56,10 +56,7 @@ export default {
                     this.typeofmsg = "alert-success";
                     this.message = "User authenticated correctly";
                     this.showMessage = true;
-
-                  
-                    console.log(this.$store.state.user);
-                    console.log(this.$store.state.user.email)
+                    this.$router.push({ name: "overview" });
                 })            
                 .catch(error => {
                     this.$store.commit('clearUserAndToken');

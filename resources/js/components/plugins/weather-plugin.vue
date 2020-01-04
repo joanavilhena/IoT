@@ -19,10 +19,10 @@ export default {
     return {
       latitude: 0.0,
       longitude: 0.0,
-      city: "Leria",
-      curTemp: null,
+      city: "Searching",
+      curTemp: 273.2,
       dataObj: null,
-      weatherDesc: "Clear day",
+      weatherDesc: "Searching",
       errorMsg: ""
     };
   },

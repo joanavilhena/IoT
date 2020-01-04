@@ -29,8 +29,12 @@ Route::delete('delete/{id}', 'SensorsControllerAPI@delete');
 // ---------- Login ----------
 
 Route::post('login', 'LoginControllerAPI@login');
-Route::post('register', 'LoginControllerAPI@register');
+Route::post('register', 'UserControllerApi@store');
 
+
+Route::post('login', 'LoginControllerAPI@login');
+ 
+Route::middleware('auth:api')->post('logout', 'LoginControllerAPI@logout');
 
 // ---------- SensorData ----------
 

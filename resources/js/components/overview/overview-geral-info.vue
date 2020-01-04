@@ -1,7 +1,5 @@
 <template>
-  <v-container>
-    <br />
-    <br />
+  <div style="padding: 5%; padding-bottom: 0">
     <v-card-title class="display-1" style="justify-content: rigth; padding-left: 0">Overview</v-card-title>
     <v-divider style="width: 90%   margin: auto"></v-divider>
     <br />
@@ -64,7 +62,7 @@
         </v-card>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>
 <script>
 export default {};

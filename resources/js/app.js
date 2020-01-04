@@ -53,7 +53,7 @@ const routes = [
     {path:'/', redirect:'/login'},
     {path:'/login', component:login, name: 'login'},
     {path:'/register', component:register},
-    {path:'/overview', component:overview},
+    {path:'/overview', component:overview, name: 'overview'},
     {path:'/solution', component:solution},
     {path:'/sensors', component:sensor},
     {path:'/sensor-history', component:sensorHistory},

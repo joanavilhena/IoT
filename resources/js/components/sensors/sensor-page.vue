@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-container>
+    <div style="padding: 5%; padding-bottom: 0">
       <br />
       <br />
       <v-card-title class="display-1" style="justify-content: rigth; padding-left: 0">Sensors</v-card-title>
@@ -79,7 +79,7 @@
       <div>
         <apexchart width="100%" type="line" :options="options" :series="series" :search="search" />
       </div>
-    </v-container>
+    </div>
   </v-app>
 </template>
 
@@ -257,7 +257,7 @@ export default {
 
     editItem(item) {
       this.editedIndex = this.sensors.indexOf(item);
-      this.editedItem = item
+      this.editedItem = item;
       this.dialog = true;
     },
 

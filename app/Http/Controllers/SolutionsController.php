@@ -102,8 +102,8 @@ class SolutionsController extends Controller
             $sensor->name =  $sensorIndividual["name"]; //$value.name ? "": "";
             $sensor->solution_id = $solution->id;
             $sensor->value = $sensorIndividual["value"];
-            $sensor->min_value = $sensorIndividual["min_value"];
-            $sensor->max_value = $sensorIndividual["max_value"];
+            $sensor->min_value = empty($sensorIndividual["min_value"]) ? "0" : $sensorIndividual["min_value"];
+            $sensor->max_value = empty($sensorIndividual["max_value"]) ? "1000" : $sensorIndividual["max_value"] ;
             $sensor->most_recent = 1;
             $sensor->created_at = Carbon::now()->toDateTimeString();
             $sensor->updated_at = Carbon::now()->toDateTimeString();
@@ -122,7 +122,7 @@ class SolutionsController extends Controller
 
         $solution = Solution::where('token', $request->token)->firstOrFail();
         $solution->update($request->all());
-        $solution->user_id = "51";
+        $solution->user_id = "1";
         $solution->vip = $request->vip;
         $solution->token = $request->token;
         $solution->state = $request->state;

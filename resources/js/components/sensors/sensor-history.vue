@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-container>
+  <div style="padding: 5%; padding-bottom: 0">
       <br />
       <br />
       <br />
@@ -13,7 +13,7 @@
         <v-text-field v-model="search" append-icon="mdi-magnify-scan" label="Search"></v-text-field>
         <v-data-table :headers="sensorsHistoryTableHeaders" :items="sensorsHistory" />
       </template>
-    </v-container>
+    </div>
   </v-app>
 </template>
 

@@ -30,8 +30,8 @@ class SensorDataController extends Controller
         $sensor->solution_id = $request->solution_id;
         $sensor->value = $request->value;
         $sensor->most_recent = 1;
-        $sensor->min_value = $request->min_value;
-        $sensor->max_value = $request->max_value;
+        $sensor->min_value = empty($request->min_value) ? "0" : $request->min_value ;
+        $sensor->max_value = empty($request->max_value) ? "1000" : $request->max_value;
         $sensor->created_at	 = Carbon::now()->toDateTimeString();;
         $sensor->updated_at = Carbon::now()->toDateTimeString();;
         $sensor->save();
@@ -60,8 +60,8 @@ class SensorDataController extends Controller
         $sensor->solution_id = $id ;
         $sensor->value = $request["value"];
         $sensor->most_recent = 1;
-        $sensor->min_value = $request["min_value"];
-        $sensor->max_value = $request["max_value"];
+        $sensor->min_value = empty($request["min_value"]) ? "0" : $request["min_value"] ;
+        $sensor->max_value = empty($request["max_value"]) ? "1000" : $request["max_value"] ;
         $sensor->created_at	 = Carbon::now()->toDateTimeString();;
         $sensor->updated_at = Carbon::now()->toDateTimeString();;
         $sensor->save();
