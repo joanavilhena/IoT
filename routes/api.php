@@ -45,6 +45,9 @@ Route::get('sensorData', 'SensorDataController@getAllMostRecentSensor');
 Route::get('sensorData/history', 'SensorDataController@getAllSensors');
 Route::get('sensorData/history/solution/{id}/sensor/{name}', 'SensorDataController@getIndividualSensor');
 
+Route::get('sensorData/solution/{solution_id}/sensor/{id}', 'SensorDataController@getIndividualSensorBySolutionAndById');
+
+
 // Sensor By solution
 Route::get('sensorData/solution/{id}', 'SensorDataController@getMostRecentSensorDataBySolution');
 

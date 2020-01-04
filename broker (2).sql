@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 04-Jan-2020 às 06:05
+-- Tempo de geração: 04-Jan-2020 às 07:53
 -- Versão do servidor: 5.7.27-0ubuntu0.18.04.1
 -- versão do PHP: 7.2.22-1+ubuntu18.04.1+deb.sury.org+1
 
@@ -212,13 +212,15 @@ INSERT INTO `sensor_data` (`id`, `solution_id`, `name`, `value`, `most_recent`, 
 (6, 2, 'ambhum', 30.00, 0, 10.00, 50.00, '2020-01-04 06:00:49', '2020-01-04 06:01:00'),
 (7, 2, 'solotemp', 30.00, 0, 10.00, 50.00, '2020-01-04 06:00:49', '2020-01-04 06:01:00'),
 (8, 2, 'solohum', 30.00, 0, 10.00, 50.00, '2020-01-04 06:00:49', '2020-01-04 06:01:00'),
-(9, 2, 'ambco', 30.00, 0, 10.00, 50.00, '2020-01-04 06:00:49', '2020-01-04 06:01:00'),
+(9, 2, 'ambco', 30.00, 0, 10.00, 50.00, '2020-01-04 06:00:49', '2020-01-04 06:50:20'),
 (10, 2, 'luz', 30.00, 1, 15.00, 50.00, '2020-01-04 06:01:00', '2020-01-04 06:01:00'),
 (11, 2, 'ambtemp', 30.00, 1, 10.00, 50.00, '2020-01-04 06:01:00', '2020-01-04 06:01:00'),
 (12, 2, 'ambhum', 30.00, 1, 10.00, 50.00, '2020-01-04 06:01:00', '2020-01-04 06:01:00'),
 (13, 2, 'solotemp', 30.00, 1, 10.00, 50.00, '2020-01-04 06:01:00', '2020-01-04 06:01:00'),
 (14, 2, 'solohum', 30.00, 1, 10.00, 50.00, '2020-01-04 06:01:00', '2020-01-04 06:01:00'),
-(15, 2, 'ambco', 30.00, 1, 10.00, 50.00, '2020-01-04 06:01:00', '2020-01-04 06:01:00');
+(15, 2, 'ambco', 30.00, 0, 10.00, 50.00, '2020-01-04 06:01:00', '2020-01-04 06:50:20'),
+(16, 2, 'ambco', 60.00, 0, 10.00, 50.00, '2020-01-04 06:50:15', '2020-01-04 06:50:20'),
+(17, 2, 'ambco', 20.00, 1, 10.00, 50.00, '2020-01-04 06:50:20', '2020-01-04 06:50:20');
 
 -- --------------------------------------------------------
 
@@ -267,7 +269,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, '123', 'tomas@sapo.com', NULL, '$2y$10$u6a52cMMEoeUjxEmlKDYyOdDpEs7y/gNlGb5/Zlpt7sJEtZ0YnKYe', NULL, '2020-01-04 05:10:50', '2020-01-04 05:10:50'),
-(2, '123', 'tomas1@sapo.com', NULL, 'O6FErsYh.go6M', NULL, '2020-01-04 05:10:50', '2020-01-04 05:10:50');
+(2, '123', 'tomas1@sapo.com', NULL, 'O6FErsYh.go6M', NULL, '2020-01-04 05:10:50', '2020-01-04 05:10:50'),
+(3, 'Toma', 'ola@sapo.pt', NULL, '$2y$10$hI9Gb8PsK.dal5Dyl4ZqqeS16GLexALTn7E9Hpfom8R4WeI.mtLju', NULL, '2020-01-04 06:58:14', '2020-01-04 06:58:14'),
+(4, 'Toma', 'ola1@sapo.pt', NULL, '$2y$10$P6H.xePwARdQdt/Uu6S58urxKBj2/T.SQ.E8GatbWFLDckvtcI7uG', NULL, '2020-01-04 06:58:55', '2020-01-04 06:58:55');
 
 --
 -- Índices para tabelas despejadas
@@ -376,7 +380,7 @@ ALTER TABLE `oauth_personal_access_clients`
 -- AUTO_INCREMENT de tabela `sensor_data`
 --
 ALTER TABLE `sensor_data`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `solutions`
@@ -388,7 +392,7 @@ ALTER TABLE `solutions`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
