@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 
-define('YOUR_SERVER_URL', 'http://iot.iot');
+define('YOUR_SERVER_URL', 'http://206.189.23.62');
 // Check "oauth_clients" table for next 2 values:
-define('CLIENT_ID', '2');
-define('CLIENT_SECRET', 'aIUd1gvwwluRquePsv9Bjjj6Wl0wzeg96XxLHWUD');
+define('CLIENT_ID', '4');
+define('CLIENT_SECRET', 'OOHqzYGWJSH4R0vJat6uHrPmTE56ZFIFU2CzRaIZ');
 
 
 class LoginControllerAPI extends Controller
