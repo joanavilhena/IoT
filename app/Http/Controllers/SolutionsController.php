@@ -187,6 +187,11 @@ class SolutionsController extends Controller
         return response()->json(Solution::where('id', $id)->first(), 200);
     }
 
+    public function getIndividualByToken($token)
+    {
+        return response()->json(Solution::where('token', $token)->first(), 200);
+    }
+
     public function getSolutionFromUser($user_id)
     {
         //return response()->json(new SolutionResources(Solution::where('id', $id)->first()), 200);

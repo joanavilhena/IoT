@@ -69,6 +69,7 @@ Route::post('sensorData/delete/solution/{id}/sensor/{name}', 'SensorDataControll
 Route::get('solution', 'SolutionsController@getAll');
 Route::get('solution/sensorData', 'SolutionsController@getAllWithSensorData');
 Route::get('solution/{id}', 'SolutionsController@getIndividual');
+Route::get('solution/token/{token}', 'SolutionsController@getIndividualByToken');
 
 
 Route::get('solution/user/{user_id}', 'SolutionsController@getSolutionFromUser');
