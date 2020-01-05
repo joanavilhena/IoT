@@ -61,6 +61,8 @@ Route::post('sensorData/update', 'SensorDataController@update');
 Route::post('sensorData/delete/solution/{id}/sensor/{name}', 'SensorDataController@delete');
 
 
+
+
 // ---------- Solutions ----------
 
 // Get
@@ -77,3 +79,6 @@ Route::post('solution/simple', 'SolutionsController@createWithoutSensors');
 Route::post('solution/update', 'SolutionsController@update');
 Route::post('solution/delete/{id}', 'SolutionsController@delete');
 
+
+Route::post('solution/force/water/{token}', 'SolutionsController@forceWater');
+Route::post('solution/force/fan/{token}', 'SolutionsController@forceFan');

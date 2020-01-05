@@ -17,10 +17,11 @@ class SolutionResources extends JsonResource
         return [
             'id' => $this->id,
             'sensor_data' =>  $this->sensor_data ,
-            'ip' => $this->ip,
             'vip' => $this->vip,
+            'terra' => $this->terra,
             'token' => $this->token,
-            'state' => $this->state,
+            'fan_force' => $this->fan_force,
+            'water_force' => $this->whater_force,
             'sensor_number' => $this->sensor_number,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

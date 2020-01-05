@@ -65,8 +65,26 @@ const router = new VueRouter({
     routes: routes
 });
 
+let protectedRoutes = [
+    'overviewr', 'solutionr', 'sensors', 'sensor-history'
+];
+
+router.beforeEach((to, from, next) => {
+
+    if ( protectedRoutes.includes( to.name ) )
+    {
+        if ( !store.state.user ) {
+            next("/login");
+            return;
+        }
+    }
+    next();
+   });
+   
+
 const app = new Vue({
     el: '#app',
+    
     store,
     vuetify: new Vuetify(),
     router: router

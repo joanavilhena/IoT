@@ -19,6 +19,7 @@ class SensorDataResources extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'value' => $this->value,
+            'threshold' => $this->threshold,
             'min_value' => $this->min_value,
             'max_value' => $this->max_value,
             'most_recent' => $this->most_recent,

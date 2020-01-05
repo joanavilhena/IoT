@@ -21,16 +21,10 @@
             >Greenhouse {{solution.id}}</v-list-item-title>
           </v-list-item-content>
           <v-row no-gutters justify="center" class="text-center" v-if="solution != undefined">
-            <v-col sm="6" class="identifierCardColl">
+            <v-col sm="12" class="identifierCardColl">
               <v-card :elevation="2">
                 <h2 class="identifierCardInfoTitle">Ref</h2>
                 <div class="identifierCardInfoText">{{solution.token}}</div>
-              </v-card>
-            </v-col>
-            <v-col sm="6" class="identifierCardColl">
-              <v-card :elevation="2">
-                <h2 class="identifierCardInfoTitle">State</h2>
-                <div class="identifierCardInfoText">{{solution.state == 1 ? "Online" : "Offline"}}</div>
               </v-card>
             </v-col>
 

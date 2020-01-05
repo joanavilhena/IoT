@@ -64,17 +64,21 @@ class SolutionsController extends Controller
         } catch (ModelNotFoundException $e) {
             $solution = new Solution();
             $solution->fill($request->all());
-            $solution->user_id = "51";
+            $solution->user_id = empty($request->user_id) ? "1" : $request->user_id;
             $solution->vip = $request->vip;
             $solution->token = $request->token;
-            $solution->state = $request->state;
+            $solution->terra = empty($request->terra) ? "Humida" : $request->terra;
+            $solution->fan_force = $request->fan_force;
+            $solution->water_force = $request->water_force;
+            $solution->fan_force = $request->fan_force;
+            $solution->water_force = $request->water_force;
             $solution->sensor_number = 0;
             $solution->created_at = Carbon::now()->toDateTimeString();;
             $solution->updated_at = Carbon::now()->toDateTimeString();;
             $solution->save();
         }
 
-        
+
         return response()->json(new SolutionResources($solution), 201);
     }
 
@@ -83,11 +87,12 @@ class SolutionsController extends Controller
 
         $solution = new Solution();
         $solution->fill($request->all()); // Fill the Details
-        $solution->user_id = "51";
+        $solution->user_id = empty($request->user_id) == true ? "1" : $request->user_id;
         $solution->vip = $request->vip;
         $solution->token = $request->token;
-        $solution->terra = $request->terra;
-        $solution->state = $request->state;
+        $solution->terra = empty($request->terra) == true ? "Humida" : $request->terra;
+        $solution->fan_force = $request->fan_force;
+        $solution->water_force = $request->water_force;
         $solution->sensor_number = count($request->sensorData);
         $solution->created_at = Carbon::now()->toDateTimeString();
         $solution->updated_at = Carbon::now()->toDateTimeString();
@@ -105,7 +110,7 @@ class SolutionsController extends Controller
             $sensor->value = $sensorIndividual["value"];
             $sensor->threshold = $sensorIndividual["threshold"];
             $sensor->min_value = empty($sensorIndividual["min_value"]) ? "0" : $sensorIndividual["min_value"];
-            $sensor->max_value = empty($sensorIndividual["max_value"]) ? "1000" : $sensorIndividual["max_value"] ;
+            $sensor->max_value = empty($sensorIndividual["max_value"]) ? "1000" : $sensorIndividual["max_value"];
             $sensor->most_recent = 1;
             $sensor->created_at = Carbon::now()->toDateTimeString();
             $sensor->updated_at = Carbon::now()->toDateTimeString();
@@ -127,7 +132,6 @@ class SolutionsController extends Controller
         $solution->user_id = "1";
         $solution->vip = $request->vip;
         $solution->token = $request->token;
-        $solution->state = $request->state;
         $solution->save();
 
         return response()->json($solution, 200);
@@ -145,6 +149,27 @@ class SolutionsController extends Controller
         return response()->json(null, 204);
     }
 
+    public function forceFan($token)
+    {
+        $solution = Solution::where('token', $token)->firstOrFail();
+        $solution->fan_force = 1;
+        $solution->save();
+        sleep(25);
+        $solution->fan_force = 0;
+        $solution->save();
+        return  response()->json(Solution::All(), 200);
+    }
+
+    public function forceWater($token)
+    {
+        $solution = Solution::where('token', $token)->firstOrFail();
+        $solution->water_force = 1;
+        $solution->save();
+        sleep(25);
+        $solution->water_force = 0;
+        $solution->save();
+        return  response()->json($solution, 200);
+    }
 
     public function getAll()
     {

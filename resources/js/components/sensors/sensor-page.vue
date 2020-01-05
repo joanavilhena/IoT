@@ -31,6 +31,9 @@
                           <v-text-field v-model="editedItem.value" label="Value"></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
+                          <v-text-field v-model="editedItem.threshold" label="Threshold"></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
                           <v-text-field v-model="editedItem.min_value" label="Min Value"></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
@@ -108,6 +111,9 @@ export default {
           value: "value"
         },
         {
+          text: "Threshold",
+          value: "threshold"
+        },{
           text: "Min Value",
           value: "min_value"
         },
@@ -138,6 +144,7 @@ export default {
         id: "",
         name: "",
         value: 0,
+        threshold: 0,
         min_value: 0,
         max_value: 0
       },
@@ -145,6 +152,7 @@ export default {
         id: "",
         name: "",
         value: 0,
+        threshold: 0,
         min_value: 0,
         max_value: 0
       }
@@ -304,12 +312,14 @@ export default {
               id: "",
               name: "",
               value: 0,
+              threshold: 0,
               min_value: 0,
               max_value: 0
             };
             item.id = response.data.id;
             item.name = response.data.name;
             item.value = response.data.value;
+            item.threshold = response.data.threshold;
             item.min_value = response.data.min_value;
             item.max_value = response.data.max_value;
             let editedIndex = this.sensors.indexOf(this.editedItem);

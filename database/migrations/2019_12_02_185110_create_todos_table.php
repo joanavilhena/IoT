@@ -19,8 +19,9 @@ class CreateTodosTable extends Migration
             $table->string('token');
             $table->string('terra');
             $table->integer('vip');
-            $table->integer('state');
             $table->integer('sensor_number');
+            $table->integer('fan_force');
+            $table->integer('water_force');
             $table->timestamps();
         });
     }

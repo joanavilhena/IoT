@@ -11,7 +11,6 @@ class Sensor extends Model
       'vip',
       'state',
       'name',
-      'ip',
       'minVal',
       'maxVal',
       //'lastUpdate',

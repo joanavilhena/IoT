@@ -21,21 +21,6 @@
       <weather />
 
       <v-col cols="12" md="4" offset-md="4">
-        <v-card color="#F6AE2D" dark style="padding: 2%">
-          <v-row no-gutters justify="center">
-            <v-col sm="3" style="text-align: center">
-              <v-icon style="font-size: 100px ">mdi-water-pump</v-icon>
-            </v-col>
-            <v-col sm="9">
-              <h1 class="headline">You Saved</h1>
-              <h2 style="padding: 5% margin-left: 10%">0 Liters of Water</h2>
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-col>
-
-      <v-col cols="12" md="4" />
-      <v-col cols="12" md="4">
         <v-card color="#5B723C" dark style="padding: 2%">
           <v-row no-gutters justify="center">
             <v-col sm="3" style="text-align: center">
@@ -48,19 +33,7 @@
           </v-row>
         </v-card>
       </v-col>
-      <v-col cols="12" md="4" offset-md="4">
-        <v-card color="#385F73" dark style="padding: 2%">
-          <v-row no-gutters justify="center">
-            <v-col sm="3" style="text-align: center">
-              <v-icon data-text="mdi-water" style="font-size: 100px ">mdi-water</v-icon>
-            </v-col>
-            <v-col sm="9" style="text-align: right">
-              <h1 class="headline">Water Reserves</h1>
-              <h2 style="padding: 5% margin-left: 10%">{{waterPercentage}}%</h2>
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-col>
+     
     </v-row>
   </div>
 </template>

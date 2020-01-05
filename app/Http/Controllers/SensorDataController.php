@@ -29,7 +29,7 @@ class SensorDataController extends Controller
         $sensor->name = $request->name;
         $sensor->solution_id = $request->solution_id;
         $sensor->value = $request->value;
-        $sensor->threshold =  $request->threshold;
+        $sensor->threshold =  empty($request->threshold) ? "1000" : $request->threshold;
         $sensor->most_recent = 1;
         $sensor->min_value = empty($request->min_value) ? "0" : $request->min_value ;
         $sensor->max_value = empty($request->max_value) ? "1000" : $request->max_value;
@@ -60,7 +60,7 @@ class SensorDataController extends Controller
         $sensor->name = $request["name"];
         $sensor->solution_id = $id ;
         $sensor->value = $request["value"];
-        $sensor->threshold = $request["threshold"];
+        $sensor->threshold =  empty($request["threshold"]) ? "1000" : $request["threshold"] ;
         $sensor->most_recent = 1;
         $sensor->min_value = empty($request["min_value"]) ? "0" : $request["min_value"] ;
         $sensor->max_value = empty($request["max_value"]) ? "1000" : $request["max_value"] ;
