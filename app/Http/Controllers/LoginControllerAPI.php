@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 // ALTERAR ESTES 3 VALORES:
-define('YOUR_SERVER_URL', 'http://iot.iot/');
+define('YOUR_SERVER_URL', 'http://iot.iot');
 
 // Check "oauth_clients" table for next 2 values: 
 define('CLIENT_ID', '2'); 
-define('CLIENT_SECRET','MMcPpCzq6RVgKa9sM3mSwywBanav27pzj3uzCBWy');
+define('CLIENT_SECRET','zUUaDZCvM6JvqzxJmjhG5IM5GV8is5xiFS1XUOvb');
 
 
 class LoginControllerAPI extends Controller
