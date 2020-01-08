@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::middleware('auth:api')->post('logout', 'LoginControllerAPI@logout');
 Route::middleware('auth:api')->get('users/me', 'UserControllerApi@myProfile');
+Route::get('users', 'UserControllerApi@index');
 
 Route::delete('delete/{id}', 'SensorsControllerAPI@delete');
 
@@ -46,6 +47,8 @@ Route::get('sensorData/history', 'SensorDataController@getAllSensors');
 Route::get('sensorData/history/solution/{id}/sensor/{name}', 'SensorDataController@getIndividualSensor');
 
 Route::get('sensorData/solution/{solution_id}/sensor/{id}', 'SensorDataController@getIndividualSensorBySolutionAndById');
+Route::get('sensorData/solution/token/{token}/sensor/{id}', 'SensorDataController@getIndividualSensorBySolutionTokenAndById');
+
 
 
 // Sensor By solution
@@ -54,9 +57,8 @@ Route::get('sensorData/solution/{solution_id}', 'SensorDataController@getMostRec
 // Post
 Route::post('sensorData', 'SensorDataController@create');
 Route::post('sensorData/update', 'SensorDataController@update');
+Route::post('sensorData/update/token/{token}', 'SensorDataController@updateWithToken');
 Route::post('sensorData/delete/solution/{id}/sensor/{name}', 'SensorDataController@delete');
-
-
 
 
 // ---------- Solutions ----------
@@ -84,3 +86,14 @@ Route::post('solution/user/{id}/reference/{token}', 'SolutionsController@addSolu
 Route::post('solution/{token}/water/{percentage}', 'SolutionsController@updateWater');
 Route::post('solution/force/water/{token}', 'SolutionsController@forceWater');
 Route::post('solution/force/fan/{token}', 'SolutionsController@forceFan');
+
+
+Route::get('solution/hub/{token}', 'SolutionsController@getSolutionWithHubToken');
+Route::get('solution/user/hub', 'SolutionsController@getHubFromUser');
+
+
+// HUb
+
+Route::post('hub', 'HubController@create');
+
+Route::get('hub', 'HubController@getAll');

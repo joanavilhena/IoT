@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Sensor;
 use App\SensorData; 
 use \Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -64,6 +65,36 @@ class SensorDataController extends Controller
         return response()->json(new SensorDataResources($sensorCreated), 201);
     }
 
+    public function updateWithToken(Request $request, $token ){
+        try {
+            $solution = Solution::where('token', $token)->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            return response()->json("No Solution with that token", 404);
+        }
+        $sensors = SensorData::where('solution_id', $solution->id)->where('id', $request->id);
+        $sensors->update(array('most_recent' => 0));
+
+
+        try {
+            $sensor = SensorData::where('solution_id', $solution->id)->where('id', $request->id)->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            return response()->json("No Sensor with that token", 404);
+        }
+        $sensorCreated = new SensorData();
+        $sensorCreated->name =  empty($request->name) ?  $sensor->name : $request->name ;
+        $sensorCreated->solution_id =  empty($request->solution_id) ?  $sensor->solution_id : $request->solution_id;
+        $sensorCreated->value = empty($request->value) ?  $sensor->value : $request->value;
+        $sensorCreated->threshold =  empty($request->threshold) ?  $sensor->threshold : $request->threshold ;
+        $sensorCreated->most_recent = 1;
+        $sensorCreated->min_value = empty($request->min_value) ?  $sensor->min_value : $request->min_value ;
+        $sensorCreated->max_value = empty($request->max_value) ?  $sensor->max_value : $request->max_value;
+        $sensorCreated->created_at	 = Carbon::now()->toDateTimeString();;
+        $sensorCreated->updated_at = Carbon::now()->toDateTimeString();;
+        $sensorCreated->save();
+         
+        return response()->json(new SensorDataResources($sensorCreated), 201);
+    }
+
     // Delete Sensor Based on name and solution
     public function delete($solution_id, $name)
     {
@@ -88,6 +119,18 @@ class SensorDataController extends Controller
     public function getIndividualSensorBySolutionAndById($solution_id, $id){
         return response()->json(SensorData::where('solution_id',$solution_id)->where('id',$id)->firstOrFail(), 200);
     }
+
+    // Deprecated - Solution id and Sensor Id 
+    public function getIndividualSensorBySolutionTokenAndById($token, $id){
+        try {
+            $solution = Solution::where('token', $token)->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            return response()->json("No Solution with that token", 404);
+        }
+        return response()->json(SensorData::where('solution_id',$solution->id)->where('id',$id)->firstOrFail(), 200);
+    }
+
+   
 
     // Get all the Sensors marked as most Recent
     public function getAllMostRecentSensor(){

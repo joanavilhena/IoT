@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\SensorData;
 use App\Solution;
+use App\User;
 use \Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -205,6 +206,17 @@ class SolutionsController extends Controller
     public function getSolutionFromUser($user_id)
     {
         return response()->json(Solution::where('user_id', $user_id)->get(), 200);
+    }
+
+    public function getHubFromUser(Request $request)
+    {
+        $user = new User();
+        return response()->json($user->hub, 200);
+    }
+
+    public function getSolutionWithHubToken($hub_token)
+    {
+        return response()->json(Solution::where('token_hub', $hub_token)->get(), 200);
     }
 
     // Deprecated

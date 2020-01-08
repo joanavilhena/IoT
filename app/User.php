@@ -45,4 +45,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Solution');
     }
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function hub()
+    {
+        return $this->hasMany('App\Hub');
+    }
 }

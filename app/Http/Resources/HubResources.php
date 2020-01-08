@@ -15,15 +15,8 @@ class Sensor extends JsonResource
      public function toArray($request)
      {
          return [
-           'id' => $this->id,
-           'state' => $this->state,
-           'vip' => $this->vip,
-           'name' => $this->name,
-           'ip' => $this->ip,
-           'minVal' => $this->minVal,
-           'maxVal' => $this->maxVal,
-           'lastUpdate'=> $this->updated_at,
-           'value'=> $this->value
+           'user_id' => $this->user_id,
+           'token_hub' => $this->token_hub,
          ];
      }
 }

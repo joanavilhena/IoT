@@ -117,8 +117,10 @@ export default {
   },
   methods: {
     getSolutions() {
+      console.log("ol")
+      console.log(this.$store.state)
       axios
-        .get("/api/solution")
+        .get("/api/solution/user/hub", this.$store.state.user) 
         .then(response => {
           this.solutions = response.data;
         })
