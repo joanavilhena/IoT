@@ -39,7 +39,6 @@ Route::middleware('auth:api')->post('logout', 'LoginControllerAPI@logout');
 
 // All sensors marked as most recent
 Route::get('sensorData', 'SensorDataController@getAllMostRecentSensor');
-//Route::get('sensorData/{id}', 'SensorDataController@getIndividualMostRecentSensor');
 
 
 // All the Sensors 
@@ -50,7 +49,7 @@ Route::get('sensorData/solution/{solution_id}/sensor/{id}', 'SensorDataControlle
 
 
 // Sensor By solution
-Route::get('sensorData/solution/{id}', 'SensorDataController@getMostRecentSensorDataBySolution');
+Route::get('sensorData/solution/{solution_id}', 'SensorDataController@getMostRecentSensorDataBySolution');
 
 // Post
 Route::post('sensorData', 'SensorDataController@create');
@@ -64,10 +63,10 @@ Route::post('sensorData/delete/solution/{id}/sensor/{name}', 'SensorDataControll
 
 // Get
 Route::get('solution', 'SolutionsController@getAll');
-Route::get('solution/sensorData', 'SolutionsController@getAllWithSensorData');
 Route::get('solution/{id}', 'SolutionsController@getIndividual');
 Route::get('solution/token/{token}', 'SolutionsController@getIndividualByToken');
 
+Route::get('solution/sensorData', 'SolutionsController@getAllWithSensorData');
 Route::get('solution/sensorData/{token}', 'SolutionsController@getByTokenWithSensorData');
 
 

@@ -13,18 +13,10 @@ use App\Http\Resources\SolutionResources;
 
 class SolutionsController extends Controller
 {
-
+    // Create new Solution, if it exists Update
     public function create(Request $request)
     {
-
-        /*$request->validate([
-            'name' => 'required|min:3|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
-            'ip' => 'required|ipv4',
-            'value' => 'required',
-            
-        ]);*/
-
-        // Shearch if it exists if it does update, if it dosn´t create
+        // Does it existe?
         try {
             $solution = Solution::where('token', $request->token)->firstOrFail();
             $solution->fill($request->all());
@@ -47,16 +39,10 @@ class SolutionsController extends Controller
         return response()->json(new SolutionResources($solution), 201);
     }
 
+    // Create a solution with no sensors  
     public function createWithoutSensors(Request $request)
     {
-
-        /*$request->validate([
-            'name' => 'required|min:3|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
-            'ip' => 'required|ipv4',
-            'value' => 'required',
-            
-        ]);*/
-
+        // Does it existe?
         try {
             $solution = Solution::where('token', $request->token)->firstOrFail();
             $solution->fill($request->all());
@@ -64,7 +50,7 @@ class SolutionsController extends Controller
         } catch (ModelNotFoundException $e) {
             $solution = new Solution();
             $solution->fill($request->all());
-            $solution->user_id = empty($request->user_id) ? 1 : $request->user_id;
+            $solution->user_id = empty($request->user_id) ? -1 : $request->user_id;
             $solution->vip = $request->vip;
             $solution->token = $request->token;
             $solution->terra = empty($request->terra) ? "Humida" : $request->terra;
@@ -76,17 +62,14 @@ class SolutionsController extends Controller
             $solution->updated_at = Carbon::now()->toDateTimeString();;
             $solution->save();
         }
-
-
         return response()->json(new SolutionResources($solution), 201);
     }
 
     public function createSolutionFromScratch($request)
     {
-
         $solution = new Solution();
         $solution->fill($request->all()); // Fill the Details
-        $solution->user_id = empty($request->user_id) == true ? 1 : $request->user_id;
+        $solution->user_id = empty($request->user_id) == true ? -1 : $request->user_id;
         $solution->vip = $request->vip;
         $solution->token = $request->token;
         $solution->terra = empty($request->terra) == true ? "Humida" : $request->terra;
@@ -121,15 +104,9 @@ class SolutionsController extends Controller
 
     public function update(Request $request)
     {
-
-        /* $request->validate([
-            'name' => 'min:3|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
-            'ip' => 'ipv4',
-        ]);*/
-
         $solution = Solution::where('token', $request->token)->firstOrFail();
         $solution->update($request->all());
-        $solution->user_id = empty($request->user_id) == true ? 1 : $request->user_id;
+        $solution->user_id = empty($request->user_id) == true ? -1 : $request->user_id;
         $solution->vip = $request->vip;
         $solution->token = $request->token;
         $solution->terra = empty($request->terra) == true ? "Humida" : $request->terra;
@@ -143,10 +120,6 @@ class SolutionsController extends Controller
 
     public function delete($token)
     {
-        /* $request->validate([
-            'name' => 'min:3|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
-            'ip' => 'ipv4',
-        ]);*/
 
         $solution = Solution::where('token', $token)->firstOrFail();
         $solution->delete();
@@ -182,7 +155,7 @@ class SolutionsController extends Controller
         $solution->save();
         return  response()->json($solution, 200);
     }
-    
+
     public function addSolutionToUser($id, $token)
     {
         $solution = Solution::where('token', $token)->firstOrFail();
@@ -191,39 +164,54 @@ class SolutionsController extends Controller
         return  response()->json($solution, 200);
     }
 
-    
-
+    // Get all
     public function getAll()
     {
         return  response()->json(Solution::All(), 200);
     }
 
+    // Get All with sensorData
     public function getAllWithSensorData()
     {
         return response()->json(SolutionResources::collection(Solution::All()), 200);
     }
 
+    // Get Solutions with sensorData by Token
     public function getByTokenWithSensorData($token)
     {
-        return response()->json(SolutionResources::make(Solution::where('token', $token)->first()), 200);
+        try {
+            $solution = Solution::where('token', $token)->firstOrFail();
+            return response()->json(SolutionResources::make($solution), 200);
+        } catch (ModelNotFoundException $e) {
+            return response()->json("No Solution with that token", 404);
+        }
     }
 
-    public function getIndividual($id)
-    {
-        //return response()->json(new SolutionResources(Solution::where('id', $id)->first()), 200);
-        return response()->json(Solution::where('id', $id)->first(), 200);
-    }
-
+    // Get solution by token
     public function getIndividualByToken($token)
     {
-        return response()->json(Solution::where('token', $token)->first(), 200);
+        try {
+            $solution = Solution::where('token', $token)->firstOrFail();
+            return response()->json($solution, 200);
+        } catch (ModelNotFoundException $e) {
+            return response()->json("No Solution with that token", 404);
+        }
     }
 
+    // Get All solution from respectiv user
     public function getSolutionFromUser($user_id)
     {
-        //return response()->json(new SolutionResources(Solution::where('id', $id)->first()), 200);
         return response()->json(Solution::where('user_id', $user_id)->get(), 200);
     }
 
-    
+    // Deprecated
+    public function getIndividual($id)
+    {
+        try {
+            $solution = Solution::where('id', $id)->firstOrFail();
+            return response()->json($solution, 200);
+        } catch (ModelNotFoundException $e) {
+            return response()->json("No Solution with that id", 404);
+        }
+    }
 }

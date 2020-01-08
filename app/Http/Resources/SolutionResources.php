@@ -22,7 +22,7 @@ class SolutionResources extends JsonResource
             'water_percentage' => $this->water_percentage,
             'token' => $this->token,
             'fan_force' => $this->fan_force,
-            'water_force' => $this->whater_force,
+            'water_force' => $this->water_force,
             'sensor_number' => $this->sensor_number,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
