@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 05-Jan-2020 às 02:13
+-- Tempo de geração: 08-Jan-2020 às 21:15
 -- Versão do servidor: 5.7.27-0ubuntu0.18.04.1
 -- versão do PHP: 7.2.22-1+ubuntu18.04.1+deb.sury.org+1
 
@@ -90,6 +90,7 @@ CREATE TABLE `oauth_access_tokens` (
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
 ('31f4a2395d4450a15162db892fd3f732c3bb23bebd849a12c05e78c14c13590facaa793c971329f6', 1, 2, NULL, '[]', 0, '2020-01-05 02:02:10', '2020-01-05 02:02:10', '2021-01-05 02:02:10'),
 ('3508b5bc4bff96e809d8bacead38876654158de9753b9c30d64ce63721a4aa14ace781fa040117ee', 1, 2, NULL, '[]', 0, '2020-01-05 01:54:43', '2020-01-05 01:54:43', '2021-01-05 01:54:43'),
+('7926a97882dad3e50ed1aa4db916337dfa65f6a621fef844a6a8294a312d01397af3ed165217b720', 2, 2, NULL, '[]', 0, '2020-01-08 21:02:23', '2020-01-08 21:02:23', '2021-01-08 21:02:23'),
 ('f14134a8952ca7edfba59cdca248b4668f5fdb0d69435a2c7e50535d0c103050b1e7be262b9cd01d', 1, 2, NULL, '[]', 0, '2020-01-05 01:48:55', '2020-01-05 01:48:55', '2021-01-05 01:48:55');
 
 -- --------------------------------------------------------
@@ -126,6 +127,14 @@ CREATE TABLE `oauth_clients` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Extraindo dados da tabela `oauth_clients`
+--
+
+INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'Laravel Personal Access Client', '2Dbm5iLdpCHUkoRZWRZeqKWJMW5CjikEexYAWaqm', 'http://localhost', 1, 0, 0, '2020-01-08 21:01:47', '2020-01-08 21:01:47'),
+(2, NULL, 'Laravel Password Grant Client', 'Q07PWdvwcGeSRC3ANJVK4U8uRs4JwsoKSwLZCkTt', 'http://localhost', 0, 1, 0, '2020-01-08 21:01:47', '2020-01-08 21:01:47');
+
 -- --------------------------------------------------------
 
 --
@@ -144,7 +153,8 @@ CREATE TABLE `oauth_personal_access_clients` (
 --
 
 INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
-(1, 1, '2020-01-05 01:48:15', '2020-01-05 01:48:15');
+(1, 1, '2020-01-05 01:48:15', '2020-01-05 01:48:15'),
+(2, 1, '2020-01-08 21:01:47', '2020-01-08 21:01:47');
 
 -- --------------------------------------------------------
 
@@ -166,6 +176,7 @@ CREATE TABLE `oauth_refresh_tokens` (
 INSERT INTO `oauth_refresh_tokens` (`id`, `access_token_id`, `revoked`, `expires_at`) VALUES
 ('34dc68f8fe40f11e5211c70a6cefbe2c6c87f6e2eea59e12604698b59df2adbdd6c9609c8545cfb1', 'f14134a8952ca7edfba59cdca248b4668f5fdb0d69435a2c7e50535d0c103050b1e7be262b9cd01d', 0, '2021-01-05 01:48:55'),
 ('4d6dfbd7ed8cd126b7577d6155a669184c97e9e249792e3df33a75538cce38703651517d643bc68a', '31f4a2395d4450a15162db892fd3f732c3bb23bebd849a12c05e78c14c13590facaa793c971329f6', 0, '2021-01-05 02:02:10'),
+('5aea289c0f0ab6e9073bb44b8b7d23204a63c34c40d25efd33cd4ff0f58695c8a4273bf9ea1dedaa', '7926a97882dad3e50ed1aa4db916337dfa65f6a621fef844a6a8294a312d01397af3ed165217b720', 0, '2021-01-08 21:02:23'),
 ('e3408e888f0fd42968dd9aeb0f6c563d0e08dc9267968aa78508aea27ceea12fc6dc6cc480be1084', '3508b5bc4bff96e809d8bacead38876654158de9753b9c30d64ce63721a4aa14ace781fa040117ee', 0, '2021-01-05 01:54:43');
 
 -- --------------------------------------------------------
@@ -204,18 +215,24 @@ CREATE TABLE `sensor_data` (
 --
 
 INSERT INTO `sensor_data` (`id`, `solution_id`, `name`, `value`, `threshold`, `most_recent`, `min_value`, `max_value`, `created_at`, `updated_at`) VALUES
-(1, 1, 'luz', 30.00, 0.00, 0, 0.00, 50.00, '2020-01-05 01:08:44', '2020-01-05 01:09:03'),
-(2, 1, 'ambtemp', 30.00, 0.00, 0, 10.00, 1000.00, '2020-01-05 01:08:44', '2020-01-05 01:09:03'),
-(3, 1, 'ambhum', 30.00, 0.00, 0, 10.00, 50.00, '2020-01-05 01:08:44', '2020-01-05 01:09:03'),
-(4, 1, 'solotemp', 30.00, 0.00, 0, 10.00, 50.00, '2020-01-05 01:08:44', '2020-01-05 01:09:03'),
-(5, 1, 'solohum', 30.00, 0.00, 0, 10.00, 50.00, '2020-01-05 01:08:44', '2020-01-05 01:09:03'),
-(6, 1, 'ambco', 30.00, 0.00, 0, 10.00, 50.00, '2020-01-05 01:08:44', '2020-01-05 01:09:03'),
-(7, 1, 'luz', 30.00, 1000.00, 1, 0.00, 50.00, '2020-01-05 01:09:03', '2020-01-05 01:09:03'),
-(8, 1, 'ambtemp', 30.00, 1000.00, 1, 10.00, 1000.00, '2020-01-05 01:09:03', '2020-01-05 01:09:03'),
-(9, 1, 'ambhum', 30.00, 1000.00, 1, 10.00, 50.00, '2020-01-05 01:09:03', '2020-01-05 01:09:03'),
-(10, 1, 'solotemp', 30.00, 1000.00, 1, 10.00, 50.00, '2020-01-05 01:09:03', '2020-01-05 01:09:03'),
-(11, 1, 'solohum', 30.00, 1000.00, 1, 10.00, 50.00, '2020-01-05 01:09:03', '2020-01-05 01:09:03'),
-(12, 1, 'ambco', 30.00, 1000.00, 1, 10.00, 50.00, '2020-01-05 01:09:03', '2020-01-05 01:09:03');
+(1, 1, 'luz', 30.00, 0.00, 0, 0.00, 50.00, '2020-01-05 01:08:44', '2020-01-08 21:13:39'),
+(2, 1, 'ambtemp', 30.00, 0.00, 0, 10.00, 1000.00, '2020-01-05 01:08:44', '2020-01-08 21:13:39'),
+(3, 1, 'ambhum', 30.00, 0.00, 0, 10.00, 50.00, '2020-01-05 01:08:44', '2020-01-08 21:13:39'),
+(4, 1, 'solotemp', 30.00, 0.00, 0, 10.00, 50.00, '2020-01-05 01:08:44', '2020-01-08 21:13:39'),
+(5, 1, 'solohum', 30.00, 0.00, 0, 10.00, 50.00, '2020-01-05 01:08:44', '2020-01-08 21:13:39'),
+(6, 1, 'ambco', 30.00, 0.00, 0, 10.00, 50.00, '2020-01-05 01:08:44', '2020-01-08 21:13:39'),
+(7, 1, 'luz', 30.00, 1000.00, 0, 0.00, 50.00, '2020-01-05 01:09:03', '2020-01-08 21:13:39'),
+(8, 1, 'ambtemp', 30.00, 1000.00, 0, 10.00, 1000.00, '2020-01-05 01:09:03', '2020-01-08 21:13:39'),
+(9, 1, 'ambhum', 30.00, 1000.00, 0, 10.00, 50.00, '2020-01-05 01:09:03', '2020-01-08 21:13:39'),
+(10, 1, 'solotemp', 30.00, 1000.00, 0, 10.00, 50.00, '2020-01-05 01:09:03', '2020-01-08 21:13:39'),
+(11, 1, 'solohum', 30.00, 1000.00, 0, 10.00, 50.00, '2020-01-05 01:09:03', '2020-01-08 21:13:39'),
+(12, 1, 'ambco', 30.00, 1000.00, 0, 10.00, 50.00, '2020-01-05 01:09:03', '2020-01-08 21:13:39'),
+(13, 1, 'luz', 30.00, 40.00, 1, 0.00, 50.00, '2020-01-08 21:13:39', '2020-01-08 21:13:39'),
+(14, 1, 'ambtemp', 30.00, 40.00, 1, 10.00, 50.00, '2020-01-08 21:13:39', '2020-01-08 21:13:39'),
+(15, 1, 'ambhum', 30.00, 40.00, 1, 10.00, 50.00, '2020-01-08 21:13:39', '2020-01-08 21:13:39'),
+(16, 1, 'solotemp', 30.00, 40.00, 1, 10.00, 50.00, '2020-01-08 21:13:39', '2020-01-08 21:13:39'),
+(17, 1, 'solohum', 30.00, 40.00, 1, 10.00, 50.00, '2020-01-08 21:13:39', '2020-01-08 21:13:39'),
+(18, 1, 'ambco', 30.00, 40.00, 1, 10.00, 50.00, '2020-01-08 21:13:39', '2020-01-08 21:13:39');
 
 -- --------------------------------------------------------
 
@@ -241,7 +258,7 @@ CREATE TABLE `solutions` (
 --
 
 INSERT INTO `solutions` (`id`, `user_id`, `token`, `terra`, `vip`, `sensor_number`, `fan_force`, `water_force`, `created_at`, `updated_at`) VALUES
-(1, 1, '4567890', 'Ddry', 1, 6, 0, 0, '2020-01-05 01:07:22', '2020-01-05 01:33:45');
+(1, 1, '4567890', 'Umido', 1, 6, 0, 0, '2020-01-05 01:07:22', '2020-01-08 21:13:39');
 
 -- --------------------------------------------------------
 
@@ -265,7 +282,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Tomas Oliveira', 'ml@sapo.pt', NULL, '$2y$10$BGN7hvUoooBhh6C2PY..7uEdJl4l2ZZhqYm7HnzW7/AvoRltqDv8q', NULL, '2020-01-05 01:47:24', '2020-01-05 01:47:24');
+(1, 'Tomas Oliveira', 'ml@sapo.pt', NULL, '$2y$10$BGN7hvUoooBhh6C2PY..7uEdJl4l2ZZhqYm7HnzW7/AvoRltqDv8q', NULL, '2020-01-05 01:47:24', '2020-01-05 01:47:24'),
+(2, 'Tomas Oliveira', '3333@sapo.pt', NULL, '$2y$10$O3C.jaKfr.H/5mwc1z8vPe7wA/oMZQ9NWzZG/ZxoTNEQRQw6Xlrli', NULL, '2020-01-08 21:02:15', '2020-01-08 21:02:15');
 
 --
 -- Índices para tabelas despejadas
@@ -368,13 +386,13 @@ ALTER TABLE `oauth_clients`
 -- AUTO_INCREMENT de tabela `oauth_personal_access_clients`
 --
 ALTER TABLE `oauth_personal_access_clients`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `sensor_data`
 --
 ALTER TABLE `sensor_data`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de tabela `solutions`
@@ -386,7 +404,7 @@ ALTER TABLE `solutions`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

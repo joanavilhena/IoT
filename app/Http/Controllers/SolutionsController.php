@@ -203,6 +203,11 @@ class SolutionsController extends Controller
         return response()->json(SolutionResources::collection(Solution::All()), 200);
     }
 
+    public function getByTokenWithSensorData($token)
+    {
+        return response()->json(SolutionResources::make(Solution::where('token', $token)->first()), 200);
+    }
+
     public function getIndividual($id)
     {
         //return response()->json(new SolutionResources(Solution::where('id', $id)->first()), 200);
@@ -219,4 +224,6 @@ class SolutionsController extends Controller
         //return response()->json(new SolutionResources(Solution::where('id', $id)->first()), 200);
         return response()->json(Solution::where('user_id', $user_id)->get(), 200);
     }
+
+    
 }
