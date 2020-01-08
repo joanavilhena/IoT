@@ -156,7 +156,7 @@ class SolutionsController extends Controller
     public function updateFanForce(Request $request, $token)
     {
         $solution = Solution::where('token', $token)->firstOrFail();
-        $solution->water_force = $request->water_force;
+        $solution->fan_force = $request->fan_force;
         $solution->save();
         return  response()->json(Solution::All(), 200);
     } 
