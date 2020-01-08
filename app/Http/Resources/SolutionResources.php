@@ -21,6 +21,7 @@ class SolutionResources extends JsonResource
             'terra' => $this->terra,
             'water_percentage' => $this->water_percentage,
             'token' => $this->token,
+            'token_hub' => $this->token_hub,
             'fan_force' => $this->fan_force,
             'water_force' => $this->water_force,
             'sensor_number' => $this->sensor_number,

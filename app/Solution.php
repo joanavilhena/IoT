@@ -11,6 +11,7 @@ class Solution extends Model
         'vip',
         'user_id',
         'token',
+        'token_hub',
         'terra',
         'water_percentage',
         'fan_force',

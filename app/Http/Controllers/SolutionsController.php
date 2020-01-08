@@ -48,18 +48,19 @@ class SolutionsController extends Controller
             $solution->fill($request->all());
             $solution->save();
         } catch (ModelNotFoundException $e) {
-            $solution = new Solution();
-            $solution->fill($request->all());
-            $solution->user_id = empty($request->user_id) ? -1 : $request->user_id;
-            $solution->vip = $request->vip;
+           $solution = new Solution();
+           $solution->fill($request->all());
+             $solution->user_id = empty($request->user_id) ? -1 : $request->user_id;
+            $solution->vip = empty($request->vip) ? 0 : $request->vip;
             $solution->token = $request->token;
+            $solution->token_hub = $request->token_hub;
             $solution->terra = empty($request->terra) ? "Humida" : $request->terra;
             $solution->water_percentage =  empty($request->water_percentage) ? 1 : $request->water_percentage;
             $solution->fan_force =  empty($request->fan_force) == true ? 0 : $request->fan_force;
             $solution->water_force =  empty($request->water_force) == true ? 0 : $request->water_force;
             $solution->sensor_number = 0;
             $solution->created_at = Carbon::now()->toDateTimeString();;
-            $solution->updated_at = Carbon::now()->toDateTimeString();;
+            $solution->updated_at = Carbon::now()->toDateTimeString();
             $solution->save();
         }
         return response()->json(new SolutionResources($solution), 201);
@@ -72,6 +73,7 @@ class SolutionsController extends Controller
         $solution->user_id = empty($request->user_id) == true ? -1 : $request->user_id;
         $solution->vip = $request->vip;
         $solution->token = $request->token;
+        $solution->token_hub = $request->token_hub;
         $solution->terra = empty($request->terra) == true ? "Humida" : $request->terra;
         $solution->water_percentage =  empty($request->water_percentage) ? 1 : $request->water_percentage;
         $solution->fan_force =  empty($request->fan_force) == true ? 0 : $request->fan_force;
@@ -109,6 +111,7 @@ class SolutionsController extends Controller
         $solution->user_id = empty($request->user_id) == true ? -1 : $request->user_id;
         $solution->vip = $request->vip;
         $solution->token = $request->token;
+        $solution->token_hub = $request->token_hub;
         $solution->terra = empty($request->terra) == true ? "Humida" : $request->terra;
         $solution->water_percentage =  empty($request->water_percentage) ? 1 : $request->water_percentage;
         $solution->fan_force =  empty($request->fan_force) == true ? 0 : $request->fan_force;
