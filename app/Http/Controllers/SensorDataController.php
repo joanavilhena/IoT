@@ -74,7 +74,6 @@ class SensorDataController extends Controller
         $sensors = SensorData::where('solution_id', $solution->id)->where('id', $request->id);
         $sensors->update(array('most_recent' => 0));
 
-
         try {
             $sensor = SensorData::where('solution_id', $solution->id)->where('id', $request->id)->firstOrFail();
         } catch (ModelNotFoundException $e) {

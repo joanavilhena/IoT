@@ -152,6 +152,24 @@ class SolutionsController extends Controller
         return  response()->json($solution, 200);
     }
 
+    
+    public function updateFanForce(Request $request, $token)
+    {
+        $solution = Solution::where('token', $token)->firstOrFail();
+        $solution->water_force = $request->water_force;
+        $solution->save();
+        return  response()->json(Solution::All(), 200);
+    } 
+    
+    public function updateWaterForce(Request $request, $token)
+    {
+        $solution = Solution::where('token', $token)->firstOrFail();
+        $solution->water_force = $request->water_force;
+        $solution->save();
+        return  response()->json($solution, 200);
+    }
+
+
     public function updateWater($token, $percentage)
     {
         $solution = Solution::where('token', $token)->firstOrFail();
