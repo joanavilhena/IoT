@@ -15,7 +15,6 @@ Vue.use(VueRouter);
 import Vue from 'vue';
 
 import Vuetify from 'vuetify'
-
 Vue.use(Vuetify)
 
 
@@ -47,6 +46,9 @@ const sensor = Vue.component('sensor', require('./components/sensors/sensor-page
 const sensorHistory = Vue.component('sensor-history', require('./components/sensors/sensor-history.vue').default);
 const solution = Vue.component('solution', require('./components/solutions/solution-page.vue').default);
 const home = Vue.component('home-page', require('./components/home-page.vue').default);
+const solution_registration = Vue.component('solution-registration', require('./components/registration/solution-registration.vue').default);
+
+
 //const editsensor = Vue.component('edit-sensor', require('./components/sensors/edit-sensor.vue').default);
 //const editGreenHouse = Vue.component('edit-green-house', require('./components/sensors/green-house-edit.vue').default); 
 const routes = [
@@ -58,6 +60,7 @@ const routes = [
     {path:'/sensors', component:sensor},
     {path:'/sensor-history', component:sensorHistory},
     {path:'/home', component:home},
+    {path:'/solution-registration', component:solution_registration},
    // {path:'/edit-sensor/:id', component:editsensor},
    // {path:'/edit-green-house/:id', component:editGreenHouse},
 ];
@@ -87,7 +90,7 @@ const app = new Vue({
     
     store,
     vuetify: new Vuetify(),
-    router: router
+    router: router,
 });
 
 

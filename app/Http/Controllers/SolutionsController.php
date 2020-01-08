@@ -64,14 +64,13 @@ class SolutionsController extends Controller
         } catch (ModelNotFoundException $e) {
             $solution = new Solution();
             $solution->fill($request->all());
-            $solution->user_id = empty($request->user_id) ? "1" : $request->user_id;
+            $solution->user_id = empty($request->user_id) ? 1 : $request->user_id;
             $solution->vip = $request->vip;
             $solution->token = $request->token;
             $solution->terra = empty($request->terra) ? "Humida" : $request->terra;
-            $solution->fan_force = $request->fan_force;
-            $solution->water_force = $request->water_force;
-            $solution->fan_force = $request->fan_force;
-            $solution->water_force = $request->water_force;
+            $solution->water_percentage =  empty($request->water_percentage) ? 1 : $request->water_percentage;
+            $solution->fan_force =  empty($request->fan_force) == true ? 0 : $request->fan_force;
+            $solution->water_force =  empty($request->water_force) == true ? 0 : $request->water_force;
             $solution->sensor_number = 0;
             $solution->created_at = Carbon::now()->toDateTimeString();;
             $solution->updated_at = Carbon::now()->toDateTimeString();;
@@ -87,12 +86,13 @@ class SolutionsController extends Controller
 
         $solution = new Solution();
         $solution->fill($request->all()); // Fill the Details
-        $solution->user_id = empty($request->user_id) == true ? "1" : $request->user_id;
+        $solution->user_id = empty($request->user_id) == true ? 1 : $request->user_id;
         $solution->vip = $request->vip;
         $solution->token = $request->token;
         $solution->terra = empty($request->terra) == true ? "Humida" : $request->terra;
-        $solution->fan_force = $request->fan_force;
-        $solution->water_force = $request->water_force;
+        $solution->water_percentage =  empty($request->water_percentage) ? 1 : $request->water_percentage;
+        $solution->fan_force =  empty($request->fan_force) == true ? 0 : $request->fan_force;
+        $solution->water_force =  empty($request->water_force) == true ? 0 : $request->water_force;
         $solution->sensor_number = count($request->sensorData);
         $solution->created_at = Carbon::now()->toDateTimeString();
         $solution->updated_at = Carbon::now()->toDateTimeString();
@@ -107,10 +107,10 @@ class SolutionsController extends Controller
             // Fill the Details
             $sensor->name =  $sensorIndividual["name"]; //$value.name ? "": "";
             $sensor->solution_id = $solution->id;
-            $sensor->value = $sensorIndividual["value"];
-            $sensor->threshold = $sensorIndividual["threshold"];
-            $sensor->min_value = empty($sensorIndividual["min_value"]) ? "0" : $sensorIndividual["min_value"];
-            $sensor->max_value = empty($sensorIndividual["max_value"]) ? "1000" : $sensorIndividual["max_value"];
+            $sensor->value = empty($sensorIndividual["value"]) ? 0 : $sensorIndividual["value"];
+            $sensor->threshold = empty($sensorIndividual["threshold"]) ? 1000 : $sensorIndividual["threshold"];
+            $sensor->min_value = empty($sensorIndividual["min_value"]) ? 0 : $sensorIndividual["min_value"];
+            $sensor->max_value = empty($sensorIndividual["max_value"]) ? 1000 : $sensorIndividual["max_value"];
             $sensor->most_recent = 1;
             $sensor->created_at = Carbon::now()->toDateTimeString();
             $sensor->updated_at = Carbon::now()->toDateTimeString();
@@ -129,9 +129,13 @@ class SolutionsController extends Controller
 
         $solution = Solution::where('token', $request->token)->firstOrFail();
         $solution->update($request->all());
-        $solution->user_id = "1";
+        $solution->user_id = empty($request->user_id) == true ? 1 : $request->user_id;
         $solution->vip = $request->vip;
         $solution->token = $request->token;
+        $solution->terra = empty($request->terra) == true ? "Humida" : $request->terra;
+        $solution->water_percentage =  empty($request->water_percentage) ? 1 : $request->water_percentage;
+        $solution->fan_force =  empty($request->fan_force) == true ? 0 : $request->fan_force;
+        $solution->water_force =  empty($request->water_force) == true ? 0 : $request->water_force;
         $solution->save();
 
         return response()->json($solution, 200);
@@ -170,6 +174,24 @@ class SolutionsController extends Controller
         $solution->save();
         return  response()->json($solution, 200);
     }
+
+    public function updateWater($token, $percentage)
+    {
+        $solution = Solution::where('token', $token)->firstOrFail();
+        $solution->water_percentage = ($solution->water_percentage - $percentage) < 0 ? 0 : $solution->water_percentage - $percentage;
+        $solution->save();
+        return  response()->json($solution, 200);
+    }
+    
+    public function addSolutionToUser($id, $token)
+    {
+        $solution = Solution::where('token', $token)->firstOrFail();
+        $solution->user_id = $id;
+        $solution->save();
+        return  response()->json($solution, 200);
+    }
+
+    
 
     public function getAll()
     {

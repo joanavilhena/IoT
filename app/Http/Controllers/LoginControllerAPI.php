@@ -9,7 +9,7 @@ define('YOUR_SERVER_URL', 'http://iot.iot/');
 
 // Check "oauth_clients" table for next 2 values: 
 define('CLIENT_ID', '2'); 
-define('CLIENT_SECRET','aIUd1gvwwluRquePsv9Bjjj6Wl0wzeg96XxLHWUD');
+define('CLIENT_SECRET','MMcPpCzq6RVgKa9sM3mSwywBanav27pzj3uzCBWy');
 
 
 class LoginControllerAPI extends Controller

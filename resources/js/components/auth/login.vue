@@ -74,19 +74,14 @@ export default {
         .post("api/login", this.user)
         .then(response => {
           this.$store.commit("setToken", response.data.access_token);
-          this.$store.commit("setUser", this.user);
-          this.typeofmsg = "alert-success";
-          this.message = "User authenticated correctly";
-          this.showMessage = true;
-          
+          return axios.get("api/users/me")
+        })
+        .then(response => {
+          this.$store.commit("setUser", response.data.data);
           this.$router.push({ name: "overview" });
-          
         })
         .catch(error => {
           this.$store.commit("clearUserAndToken");
-          this.typeofmsg = "alert-danger";
-          this.message = "Invalid credentials";
-          this.showMessage = true;
           // console.log(error);
         });
     }

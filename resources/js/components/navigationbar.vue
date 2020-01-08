@@ -28,7 +28,10 @@
               <router-link class="nav-link" to="/overview">Overview</router-link>
             </b-nav-item>
             <b-nav-item>
-              <router-link class="nav-link" to="/solution">Solutions</router-link>
+              <router-link class="nav-link" to="/solution-registration">Solution Registration</router-link>
+            </b-nav-item>
+            <b-nav-item>
+              <router-link class="nav-link" to="/solution">Greenhouses</router-link>
             </b-nav-item>
             <b-nav-item>
               <router-link class="nav-link" to="/sensors">Sensors</router-link>
@@ -59,8 +62,6 @@ export default {
     return {};
   },
   mounted() {
-    console.log("1");
-    console.log(this.$store.state);
   },
   methods: {
     logout() {

@@ -18,11 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:api')->post('logout', 'LoginControllerAPI@logout');
-/*
-Route::get('sensors', 'SensorsControllerAPI@index');
-Route::get('sensor/{id}', 'SensorsControllerAPI@getSensor');
-Route::post('create', 'SensorDataController@create');
-Route::patch('update', 'SensorsControllerAPI@update');*/
+Route::middleware('auth:api')->get('users/me', 'UserControllerApi@myProfile');
+
 Route::delete('delete/{id}', 'SensorsControllerAPI@delete');
 
 
@@ -81,5 +78,8 @@ Route::post('solution/update', 'SolutionsController@update');
 Route::post('solution/delete/{id}', 'SolutionsController@delete');
 
 
+Route::post('solution/user/{id}/reference/{token}', 'SolutionsController@addSolutionToUser');
+
+Route::post('solution/{token}/water/{percentage}', 'SolutionsController@updateWater');
 Route::post('solution/force/water/{token}', 'SolutionsController@forceWater');
 Route::post('solution/force/fan/{token}', 'SolutionsController@forceFan');

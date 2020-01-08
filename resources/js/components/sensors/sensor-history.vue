@@ -48,6 +48,10 @@ export default {
         {
           text: "Max Value",
           value: "max_value"
+        },
+        {
+          text: "Registration Date",
+          value: "created_at"
         }
       ],
 

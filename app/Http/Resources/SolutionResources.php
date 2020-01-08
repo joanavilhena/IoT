@@ -19,6 +19,7 @@ class SolutionResources extends JsonResource
             'sensor_data' =>  $this->sensor_data ,
             'vip' => $this->vip,
             'terra' => $this->terra,
+            'water_percentage' => $this->water_percentage,
             'token' => $this->token,
             'fan_force' => $this->fan_force,
             'water_force' => $this->whater_force,

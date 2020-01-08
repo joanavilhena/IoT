@@ -18,6 +18,7 @@ class CreateTodosTable extends Migration
             $table->integer('user_id');
             $table->string('token');
             $table->string('terra');
+            $table->float('water_percentage');
             $table->integer('vip');
             $table->integer('sensor_number');
             $table->integer('fan_force');

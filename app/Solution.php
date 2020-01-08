@@ -12,6 +12,7 @@ class Solution extends Model
         'user_id',
         'token',
         'terra',
+        'water_percentage',
         'fan_force',
         'water_force',
         'vip',

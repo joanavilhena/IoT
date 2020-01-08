@@ -86,6 +86,10 @@ export default {
           text: "Number of Sensors",
           value: "sensor_number"
         },
+        {
+          text: "Percentage Of Water (0 - 1)",
+          value: "water_percentage"
+        },
         { text: "Actions", value: "action", sortable: false }
       ],
       terraTypes: ["Wet", "Dry"],
