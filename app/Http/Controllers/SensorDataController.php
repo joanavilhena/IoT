@@ -129,8 +129,6 @@ class SensorDataController extends Controller
         return response()->json(SensorData::where('solution_id',$solution->id)->where('id',$id)->firstOrFail(), 200);
     }
 
-   
-
     // Get all the Sensors marked as most Recent
     public function getAllMostRecentSensor(){
         $sensor = SensorData::where("most_recent", "=", 1)->get();

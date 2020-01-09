@@ -11,7 +11,6 @@ class HubController extends Controller
     public function create(Request $request)
     {
         $hub = new Hub();
-        $hub->fill($request->all());
         $hub->user_id = $request->user_id;
         $hub->token_hub = $request->token_hub;
         $hub->save();

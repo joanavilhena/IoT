@@ -11,6 +11,7 @@ use \Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\SolutionResources;
+use App\Hub;
 
 class SolutionsController extends Controller
 {
@@ -138,18 +139,18 @@ class SolutionsController extends Controller
         sleep(25);
         $solution->fan_force = 0;
         $solution->save();
-        return  response()->json(Solution::All(), 200);
+        return  response()->json($solution, 200);
     }
 
     public function forceWater($token)
     {
-        $solution = Solution::where('token', $token)->firstOrFail();
+       /* $solution = Solution::where('token', $token)->firstOrFail();
         $solution->water_force = 1;
         $solution->save();
         sleep(25);
         $solution->water_force = 0;
         $solution->save();
-        return  response()->json($solution, 200);
+        return  response()->json($solution, 200);*/
     }
 
 
@@ -236,10 +237,14 @@ class SolutionsController extends Controller
         return response()->json(Solution::where('user_id', $user_id)->get(), 200);
     }
 
-    public function getHubFromUser(Request $request)
+    public function getHubFromUser($id)
     {
-        $user = new User();
-        return response()->json($user->hub, 200);
+        $hubs = Hub::where('user_id', $id)->get();
+        
+        foreach ($hubs as $key => $hub) {
+            $solutions[$key] = Solution::where('token_hub', $hub->token_hub )->get();
+        }
+        return response()->json($solutions, 200);
     }
 
     public function getSolutionWithHubToken($hub_token)

@@ -84,8 +84,9 @@ Route::post('solution/delete/{id}', 'SolutionsController@delete');
 Route::post('solution/user/{id}/reference/{token}', 'SolutionsController@addSolutionToUser');
 
 Route::post('solution/{token}/water/{percentage}', 'SolutionsController@updateWater');
-Route::post('solution/force/water/{token}', 'SolutionsController@forceWater');
-Route::post('solution/force/fan/{token}', 'SolutionsController@forceFan');
+
+Route::post('solution/fan/{token}', 'SolutionsController@forceFan');
+Route::post('solution/water/{token}', 'SolutionsController@forceWater');
 
 Route::post('solution/fan/update/{token}', 'SolutionsController@updateFanForce');
 Route::post('solution/water/update/{token}', 'SolutionsController@updateWaterForce');
@@ -94,7 +95,7 @@ Route::post('solution/water/update/{token}', 'SolutionsController@updateWaterFor
 
 
 Route::get('solution/hub/{token}', 'SolutionsController@getSolutionWithHubToken');
-Route::get('solution/user/hub', 'SolutionsController@getHubFromUser');
+Route::get('solution/hub/user/{id}', 'SolutionsController@getHubFromUser');
 
 
 // HUb

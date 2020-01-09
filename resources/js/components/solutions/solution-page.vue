@@ -151,14 +151,14 @@ export default {
     },
     waterForce(item) {
       axios
-        .post("/api/solution/force/water/"+ this.editedItem.token)
+        .post("/api/solution/water/"+ this.editedItem.token)
         .then(response => {
           console.log()
         });
     },
     fanForce(item) {
       axios
-        .post("/api/solution/force/fan/"+ this.editedItem.token)
+        .post("/api/solution/fan/"+ this.editedItem.token)
         .then(response => {
           console.log()
         });
