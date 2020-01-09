@@ -87,6 +87,11 @@ Route::post('solution/{token}/water/{percentage}', 'SolutionsController@updateWa
 Route::post('solution/force/water/{token}', 'SolutionsController@forceWater');
 Route::post('solution/force/fan/{token}', 'SolutionsController@forceFan');
 
+Route::post('solution/fan/update/{token}', 'SolutionsController@updateFanForce');
+Route::post('solution/water/update/{token}', 'SolutionsController@updateWaterForce');
+
+
+
 
 Route::get('solution/hub/{token}', 'SolutionsController@getSolutionWithHubToken');
 Route::get('solution/user/hub', 'SolutionsController@getHubFromUser');
