@@ -49,9 +49,9 @@ class SolutionsController extends Controller
             $solution->fill($request->all());
             $solution->save();
         } catch (ModelNotFoundException $e) {
-           $solution = new Solution();
-           $solution->fill($request->all());
-             $solution->user_id = empty($request->user_id) ? -1 : $request->user_id;
+            $solution = new Solution();
+            $solution->fill($request->all());
+            $solution->user_id = empty($request->user_id) ? -1 : $request->user_id;
             $solution->vip = empty($request->vip) ? 0 : $request->vip;
             $solution->token = $request->token;
             $solution->token_hub = $request->token_hub;
@@ -152,18 +152,28 @@ class SolutionsController extends Controller
         return  response()->json($solution, 200);
     }
 
-    
+
     public function updateFanForce(Request $request, $token)
     {
-        $solution = Solution::where('token', $token)->firstOrFail();
+        try {
+            $solution = Solution::where('token', $token)->firstOrFail();
+            return response()->json($solution, 200);
+        } catch (ModelNotFoundException $e) {
+            return response()->json("No Solution with that token", 404);
+        }
         $solution->fan_force = $request->fan_force;
         $solution->save();
         return  response()->json(Solution::All(), 200);
-    } 
-    
+    }
+
     public function updateWaterForce(Request $request, $token)
     {
-        $solution = Solution::where('token', $token)->firstOrFail();
+        try {
+            $solution = Solution::where('token', $token)->firstOrFail();
+            return response()->json($solution, 200);
+        } catch (ModelNotFoundException $e) {
+            return response()->json("No Solution with that token", 404);
+        }
         $solution->water_force = $request->water_force;
         $solution->save();
         return  response()->json($solution, 200);
