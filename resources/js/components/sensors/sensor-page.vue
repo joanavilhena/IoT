@@ -141,6 +141,7 @@ export default {
         id: "",
         name: "",
         value: 0,
+        token: "4567891",
         threshold: 0,
         min_value: 0,
         max_value: 0
