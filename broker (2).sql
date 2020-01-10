@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 09-Jan-2020 às 01:14
+-- Tempo de geração: 10-Jan-2020 às 10:57
 -- Versão do servidor: 5.7.27-0ubuntu0.18.04.1
 -- versão do PHP: 7.2.22-1+ubuntu18.04.1+deb.sury.org+1
 
@@ -288,7 +288,7 @@ CREATE TABLE `solutions` (
 --
 
 INSERT INTO `solutions` (`id`, `user_id`, `token`, `token_hub`, `terra`, `water_percentage`, `vip`, `sensor_number`, `fan_force`, `water_force`, `created_at`, `updated_at`) VALUES
-(1, 2, '4567890', '4567890', 'Umido', 1.00, 1, 6, 0, 1, '2020-01-08 22:51:55', '2020-01-09 01:07:11'),
+(1, 2, '4567890', '4567890', 'Umido', 1.00, 1, 6, 0, 1, '2020-01-08 22:51:55', '2020-01-09 01:32:29'),
 (2, -1, '4567890d', '4567890', 'Humida', 1.00, 1, 6, 0, 0, '2020-01-09 00:58:43', '2020-01-09 01:01:20');
 
 -- --------------------------------------------------------
