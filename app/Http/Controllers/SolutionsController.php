@@ -144,13 +144,13 @@ class SolutionsController extends Controller
 
     public function forceWater($token)
     {
-       /* $solution = Solution::where('token', $token)->firstOrFail();
+        $solution = Solution::where('token', $token)->firstOrFail();
         $solution->water_force = 1;
         $solution->save();
         sleep(25);
         $solution->water_force = 0;
         $solution->save();
-        return  response()->json($solution, 200);*/
+        return  response()->json($solution, 200);
     }
 
 
