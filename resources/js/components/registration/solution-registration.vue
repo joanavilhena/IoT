@@ -24,7 +24,7 @@ export default {
   data: () => ({
     isFormValid: false,
     token: "",
-    tokenRules: [v => v.length > 5 || "Reference must be bigger than 5 characters long"]
+    tokenRules: [v => v.length > 2 || "Reference must be bigger than 5 characters long"]
   }),
   mounted() {
   },
