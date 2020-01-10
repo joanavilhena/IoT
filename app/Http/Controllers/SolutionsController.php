@@ -136,7 +136,7 @@ class SolutionsController extends Controller
         $solution = Solution::where('token', $token)->firstOrFail();
         $solution->fan_force = 1;
         $solution->save();
-        sleep(25);
+        sleep(15);
         $solution->fan_force = 0;
         $solution->save();
         return  response()->json($solution, 200);
@@ -147,7 +147,7 @@ class SolutionsController extends Controller
         $solution = Solution::where('token', $token)->firstOrFail();
         $solution->water_force = 1;
         $solution->save();
-        sleep(25);
+        sleep(15);
         $solution->water_force = 0;
         $solution->save();
         return  response()->json($solution, 200);
