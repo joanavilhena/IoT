@@ -59,9 +59,13 @@ class SensorDataController extends Controller
     // Update will not replace the old one but change the falir (most recent and place a new regist in bd)
     public function update(Request $request)
     {
-
+        try {
+            $solution = Solution::where('token', $token)->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            return response()->json("No Solution with that token", 404);
+        }
         // Update Sensor based On name
-        $sensors = SensorData::where('token', $request->token)->where('name', $request->name);
+        $sensors = SensorData::where('solution_id', $solution->id)->where('name', $request->name);
         $sensors->update(array('most_recent' => 0));
         $sensorCreated = $this->createSensorFromScratch($request, $request->solution_id);
 
