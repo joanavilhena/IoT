@@ -28,7 +28,7 @@
               <router-link class="nav-link" to="/overview">Overview</router-link>
             </b-nav-item>
             <b-nav-item>
-              <router-link class="nav-link" to="/solution-registration">Solution Registration</router-link>
+              <router-link class="nav-link" to="/solution-registration">Hub Registration</router-link>
             </b-nav-item>
             <b-nav-item>
               <router-link class="nav-link" to="/solution">Greenhouses</router-link>
