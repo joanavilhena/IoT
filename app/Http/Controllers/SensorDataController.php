@@ -60,7 +60,7 @@ class SensorDataController extends Controller
     public function update(Request $request)
     {
         try {
-            $solution = Solution::where('token', $token)->firstOrFail();
+            $solution = Solution::where('token', $request->token)->firstOrFail();
         } catch (ModelNotFoundException $e) {
             return response()->json("No Solution with that token", 404);
         }
