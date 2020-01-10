@@ -61,7 +61,7 @@ class SensorDataController extends Controller
     {
 
         // Update Sensor based On name
-        $sensors = SensorData::where('solution_id', $request->solution_id)->where('name', $request->name);
+        $sensors = SensorData::where('token', $request->token)->where('name', $request->name);
         $sensors->update(array('most_recent' => 0));
         $sensorCreated = $this->createSensorFromScratch($request, $request->solution_id);
 
