@@ -173,7 +173,7 @@ export default {
   methods: {
     getSensors() {
       axios
-        .get("/api/sensorData")
+        .get("/api/sensorData/hub/user/" + this.$store.state.user.id)
         .then(response => {
           this.sensors = response.data;
         })

@@ -95,7 +95,7 @@ class SolutionsController extends Controller
             $sensor->name =  $sensorIndividual["name"]; //$value.name ? "": "";
             $sensor->solution_id = $solution->id;
             $sensor->value = empty($sensorIndividual["value"]) ? 0 : $sensorIndividual["value"];
-            $sensor->threshold = empty($sensorIndividual["threshold"]) ? 1000 : $sensorIndividual["threshold"];
+            $sensor->threshold = empty($sensorIndividual["threshold"]) ? 5 : $sensorIndividual["threshold"];
             $sensor->min_value = empty($sensorIndividual["min_value"]) ? 0 : $sensorIndividual["min_value"];
             $sensor->max_value = empty($sensorIndividual["max_value"]) ? 1000 : $sensorIndividual["max_value"];
             $sensor->most_recent = 1;
@@ -240,11 +240,18 @@ class SolutionsController extends Controller
     public function getHubFromUser($id)
     {
         $hubs = Hub::where('user_id', $id)->get();
-        
+        $solutions = [];
         foreach ($hubs as $key => $hub) {
-            $solutions[$key] = Solution::where('token_hub', $hub->token_hub )->get();
+            $solution = Solution::where('token_hub', $hub->token_hub)->get();
+            foreach ($solution as  $key => $objecto) {
+                array_push($solutions, $objecto);
+            }
         }
-        return response()->json($solutions, 200);
+        if (empty($solutions)) {
+            $solutions = [];
+            return response()->json($solutions, 404);
+        }
+        return response()->json(array_unique($solutions), 200);
     }
 
     public function getSolutionWithHubToken($hub_token)

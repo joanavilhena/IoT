@@ -94,8 +94,11 @@ Route::post('solution/water/update/{token}', 'SolutionsController@updateWaterFor
 
 
 
+Route::get('sensorData/hub/user/{id}', 'SensorDataController@getAllMostRecentSensorFromUser');
 Route::get('solution/hub/{token}', 'SolutionsController@getSolutionWithHubToken');
 Route::get('solution/hub/user/{id}', 'SolutionsController@getHubFromUser');
+
+Route::get('sensorData/history/hub/user/{id}', 'SensorDataController@getAllSensorsFromUser');
 
 
 // HUb

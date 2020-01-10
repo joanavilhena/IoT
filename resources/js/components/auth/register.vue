@@ -63,8 +63,11 @@ export default {
         .post("api/register", user)
         .then(response => {
           this.$store.commit("setToken", response.data.access_token);
-          this.$router.push({ name: "login" });
-          
+         return axios.get("api/users/me");
+        })
+        .then(response => {
+          this.$store.commit("setUser", response.data.data);
+          this.$router.push({ name: "overview" });
         })
         .catch(error => {
           console.log(error);

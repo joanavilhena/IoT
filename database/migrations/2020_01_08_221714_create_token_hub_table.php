@@ -16,7 +16,7 @@ class CreateTokenHubTable extends Migration
         Schema::create('hubs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->integer('token_hub');
+            $table->string('token_hub');
             $table->timestamps();
         });
     }

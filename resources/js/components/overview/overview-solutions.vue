@@ -89,7 +89,7 @@ export default {
   methods: {
     getSolutions() {
       axios
-        .get("/api/solution")
+        .get("/api/solution/hub/user/" + this.$store.state.user.id)
         .then(response => {
           this.solutions = response.data;
         })
@@ -121,7 +121,7 @@ export default {
       axios
         .post("/api/solution/delete/" + token)
         .then(response => {
-          console.log(this.solutions)
+          console.log(this.solutions);
           let indexToBeDeleted = -1;
           this.solutions.filter(function(element, index) {
             if (element.token == token) {
@@ -133,7 +133,7 @@ export default {
 
           this.solutions.splice(indexToBeDeleted, 1);
 
-          console.log(solutionToBeDeleted)
+          console.log(solutionToBeDeleted);
         })
         .catch(error => {
           if (error.response) {

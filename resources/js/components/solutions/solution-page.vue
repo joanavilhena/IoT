@@ -33,12 +33,7 @@
                           >Force Water Disposal</v-btn>
                         </v-col>
                         <v-col cols="6" sm="6" md="6">
-                          <v-btn
-                            x-small
-                            color="secondary"
-                            dark
-                            @click="fanForce"
-                          >Force Fan Ramp Up</v-btn>
+                          <v-btn x-small color="secondary" dark @click="fanForce">Force Fan Ramp Up</v-btn>
                         </v-col>
                       </v-row>
                     </v-container>
@@ -46,8 +41,8 @@
 
                   <v-card-actions style="text-align: center">
                     <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1"  text @click="close">Cancel</v-btn>
-                    <v-btn color="blue darken-1"  text @click="save">Save</v-btn>
+                    <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+                    <v-btn color="blue darken-1" text @click="save">Save</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -118,7 +113,7 @@ export default {
   methods: {
     getSolutions() {
       axios
-        .get("/api/solution")
+        .get("/api/solution/hub/user/" + this.$store.state.user.id)
         .then(response => {
           this.solutions = response.data;
         })
@@ -151,16 +146,14 @@ export default {
     },
     waterForce(item) {
       axios
-        .post("/api/solution/water/"+ this.editedItem.token)
+        .post("/api/solution/water/" + this.editedItem.token)
         .then(response => {
-          console.log()
         });
     },
     fanForce(item) {
       axios
-        .post("/api/solution/fan/"+ this.editedItem.token)
+        .post("/api/solution/fan/" + this.editedItem.token)
         .then(response => {
-          console.log()
         });
     },
     editItem(item) {

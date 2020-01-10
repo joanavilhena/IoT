@@ -56,7 +56,7 @@ export default {
   methods: {
     getSolutions() {
       axios
-        .get("/api/solution")
+        .get("/api/solution/hub/user/" + this.$store.state.user.id)
         .then(response => {
           let solucoes = response.data;
           this.countSolutions = solucoes.length;

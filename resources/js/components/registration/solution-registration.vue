@@ -30,8 +30,12 @@ export default {
   },
   methods: {
     submit() {
+      let user = {
+        "user_id": this.$store.state.user.id, 
+        "token_hub": this.token
+      }
       axios
-        .post("api/solution/user/" + this.$store.state.user.id + "/reference/" + this.token)
+        .post("api/hub", user)
         .then(response => {
           console.log(response);
         })

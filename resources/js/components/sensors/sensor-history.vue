@@ -64,7 +64,7 @@ export default {
    
     getSensorsHistory() {
       axios
-        .get("/api/sensorData/history")
+        .get("/api/sensorData/history/hub/user/" + this.$store.state.user.id)
         .then(response => {
           this.sensorsHistory = response.data;
           
