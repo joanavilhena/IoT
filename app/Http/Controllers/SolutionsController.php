@@ -96,7 +96,7 @@ class SolutionsController extends Controller
             $sensor->solution_id = $solution->id;
             $sensor->value = empty($sensorIndividual["value"]) ? 0 : $sensorIndividual["value"];
             $sensor->threshold = empty($sensorIndividual["threshold"]) ? 5 : $sensorIndividual["threshold"];
-            $sensor->min_value = empty($sensorIndividual["min_value"]) ? 0 : $sensorIndividual["min_value"];
+            $sensor->min_value = empty($sensorIndividual["min_value"]) ? 30 : $sensorIndividual["min_value"];
             $sensor->max_value = empty($sensorIndividual["max_value"]) ? 1000 : $sensorIndividual["max_value"];
             $sensor->most_recent = 1;
             $sensor->created_at = Carbon::now()->toDateTimeString();

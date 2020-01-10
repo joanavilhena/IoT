@@ -23,7 +23,7 @@ class SensorDataController extends Controller
         $sensor->value = $request->value;
         $sensor->threshold =  empty($request->threshold) ? "5" : $request->threshold;
         $sensor->most_recent = 1;
-        $sensor->min_value = empty($request->min_value) ? "0" : $request->min_value;
+        $sensor->min_value = empty($request->min_value) ? "30" : $request->min_value;
         $sensor->max_value = empty($request->max_value) ? "1000" : $request->max_value;
         $sensor->created_at     = Carbon::now()->toDateTimeString();;
         $sensor->updated_at = Carbon::now()->toDateTimeString();;
@@ -47,7 +47,7 @@ class SensorDataController extends Controller
         $sensor->value = $request["value"];
         $sensor->threshold =  empty($request["threshold"]) ? "5" : $request["threshold"];
         $sensor->most_recent = 1;
-        $sensor->min_value = empty($request["min_value"]) ? "0" : $request["min_value"];
+        $sensor->min_value = empty($request["min_value"]) ? "30" : $request["min_value"];
         $sensor->max_value = empty($request["max_value"]) ? "1000" : $request["max_value"];
         $sensor->created_at     = Carbon::now()->toDateTimeString();;
         $sensor->updated_at = Carbon::now()->toDateTimeString();;
